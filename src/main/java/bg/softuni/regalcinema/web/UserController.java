@@ -17,11 +17,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @ModelAttribute("registerData")
-    private UserRegisterDto registerDto(){
-        return new UserRegisterDto();
-    }
-
     @GetMapping("/register")
     public ModelAndView viewRegister(){
 
@@ -33,7 +28,9 @@ public class UserController {
     @PostMapping("/register")
     public String doRegister(@RequestBody @Valid UserRegisterDto registerDto){
 
-        this.userService.register(registerDto);
+        if (!this.userService.register(registerDto)) {
+            return "oops";
+        }
 
         return "hello-world";
     }

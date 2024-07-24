@@ -1,33 +1,33 @@
-package bg.softuni.regalcinema.model;
+package bg.softuni.regalcinema.model.dtos;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-@Entity
-@Table(name = "cinemas")
-public class Cinema extends BaseEntity {
+public class AddCinemaDto {
 
-    @Column(nullable = false, unique = true)
+    @NotBlank
+    @Size(min = 3, max = 30)
     private String name;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(min = 3, max = 30)
     private String location;
 
-    @Basic
+    @Size(min = 15, max = 300)
     private String description;
 
-    @Column(nullable = false, name = "phone_number")
+    @NotBlank
+    @Size(min = 10, max = 13)
     private String phoneNumber;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-
-    @Column(nullable = false, name = "working_time")
+    @NotBlank
+    @Size(min = 9, max = 11)
     private String workingTime;
 
-    public Cinema() {}
+    @Size(min = 15, max = 200)
+    private String imageUrl;
+
+    public AddCinemaDto() {}
 
     public String getName() {
         return name;

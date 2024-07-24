@@ -1,61 +1,42 @@
-package bg.softuni.regalcinema.model;
+package bg.softuni.regalcinema.model.dtos;
+
 
 import bg.softuni.regalcinema.model.enums.Audio;
 import bg.softuni.regalcinema.model.enums.Genre;
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
-import java.time.LocalDate;
+public class AddMovieDto {
 
-@Entity
-@Table(name = "movies")
-public class Movie extends BaseEntity {
-
-    @Column(nullable = false, unique = true)
+    @NotBlank
+    @Size(min = 2, max = 50)
     private String title;
 
-    @Column(nullable = false, name = "director_name")
+    @NotBlank
+    @Size(min = 3, max = 50)
     private String directorName;
 
-    @Basic
+    @Size(min = 10, max = 100)
     private String actors;
 
-    @Column(nullable = false)
+    @NotBlank
+    @Size(min = 20, max = 200)
     private String description;
 
-    @Column(nullable = false, name = "length_in_minutes")
+    @Positive
     private double lengthInMinutes;
 
-    @Basic
-    private LocalDate premiere;
+    private String premiere;
 
-    @Column(name = "video_url")
+    @Size(min = 10, max = 200)
     private String videoUrl;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Audio audio;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Genre genre;
 
-    public Movie() {}
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDirectorName() {
-        return directorName;
-    }
-
-    public void setDirectorName(String directorName) {
-        this.directorName = directorName;
-    }
+    public AddMovieDto() {}
 
     public String getActors() {
         return actors;
@@ -73,6 +54,14 @@ public class Movie extends BaseEntity {
         this.description = description;
     }
 
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName;
+    }
+
     public double getLengthInMinutes() {
         return lengthInMinutes;
     }
@@ -81,12 +70,28 @@ public class Movie extends BaseEntity {
         this.lengthInMinutes = lengthInMinutes;
     }
 
-    public LocalDate getPremiere() {
+    public String getPremiere() {
         return premiere;
     }
 
-    public void setPremiere(LocalDate premiere) {
+    public void setPremiere(String premiere) {
         this.premiere = premiere;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public Audio getAudio() {
@@ -103,13 +108,5 @@ public class Movie extends BaseEntity {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
     }
 }
