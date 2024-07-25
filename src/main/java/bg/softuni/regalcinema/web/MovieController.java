@@ -24,6 +24,18 @@ public class MovieController {
             return "oops";
         }
 
+        //{
+        //    "title": "Harry Potter",
+        //    "directorName": "Chris Columbus",
+        //    "actors": "Daniel Radcliffe, Emma Watson, Rupert Green, Tom Felton...",
+        //    "description": "An orphaned boy enrolls in a school of wizardry, where he learns the truth about himself, his family and the terrible evil that haunts the magical world.",
+        //    "lengthInMinutes": "152",
+        //    "premiere": "15-02-2002",
+        //    "videoUrl": "https://www.youtube.com/watch?v=VyHV0BRtdxo",
+        //    "audio": "ENGLISH",
+        //    "genre": "FANTASY"
+        //}
+
         return "hello-world";
     }
 }

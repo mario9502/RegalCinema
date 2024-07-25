@@ -6,13 +6,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "marathons")
 public class Marathon extends BaseEntity {
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
@@ -29,7 +30,7 @@ public class Marathon extends BaseEntity {
 
     private String description;
 
-    public Marathon() {}
+    public Marathon() {this.movies = new ArrayList<>();}
 
     public String getName() {
         return name;
@@ -77,5 +78,9 @@ public class Marathon extends BaseEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void addMovie(Movie movie) {
+        this.movies.add(movie);
     }
 }

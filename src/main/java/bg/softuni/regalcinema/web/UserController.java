@@ -32,15 +32,15 @@ public class UserController {
             return "oops";
         }
 
+        //{
+        //    "username": "mario9502",
+        //    "password": "123123",
+        //    "confirmPassword": "123123",
+        //    "email": "mario@mario",
+        //    "firstName": "Mario",
+        //    "lastName": "Penkov"
+        //}
+
         return "hello-world";
     }
-
-    //{
-    //    "username": "test",
-    //    "password": "test",
-    //    "confirmPassword": "test",
-    //    "email": "test",
-    //    "firstName": "test",
-    //    "lastName": "test"
-    //}
 }

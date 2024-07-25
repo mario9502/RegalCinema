@@ -23,7 +23,7 @@ public class Movie extends BaseEntity {
     private String description;
 
     @Column(nullable = false, name = "length_in_minutes")
-    private double lengthInMinutes;
+    private int lengthInMinutes;
 
     @Basic
     private LocalDate premiere;
@@ -73,11 +73,11 @@ public class Movie extends BaseEntity {
         this.description = description;
     }
 
-    public double getLengthInMinutes() {
+    public int getLengthInMinutes() {
         return lengthInMinutes;
     }
 
-    public void setLengthInMinutes(double lengthInMinutes) {
+    public void setLengthInMinutes(int lengthInMinutes) {
         this.lengthInMinutes = lengthInMinutes;
     }
 

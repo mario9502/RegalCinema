@@ -10,7 +10,7 @@ public class AddCinemaDto {
     private String name;
 
     @NotBlank
-    @Size(min = 3, max = 30)
+    @Size(min = 3, max = 150)
     private String location;
 
     @Size(min = 15, max = 300)

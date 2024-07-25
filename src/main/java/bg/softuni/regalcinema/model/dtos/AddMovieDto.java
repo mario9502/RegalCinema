@@ -25,7 +25,7 @@ public class AddMovieDto {
     private String description;
 
     @Positive
-    private double lengthInMinutes;
+    private int lengthInMinutes;
 
     private String premiere;
 
@@ -62,11 +62,11 @@ public class AddMovieDto {
         this.directorName = directorName;
     }
 
-    public double getLengthInMinutes() {
+    public int getLengthInMinutes() {
         return lengthInMinutes;
     }
 
-    public void setLengthInMinutes(double lengthInMinutes) {
+    public void setLengthInMinutes(int lengthInMinutes) {
         this.lengthInMinutes = lengthInMinutes;
     }
 

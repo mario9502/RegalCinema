@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MarathonRepository extends JpaRepository<Marathon, Long> {
+
+    boolean existsByName(String name);
 }

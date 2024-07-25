@@ -25,6 +25,15 @@ public class CinemaController {
             return "oops";
         }
 
+        //{
+        //    "name": "Cape Cod Mall",
+        //    "location": "793 Iyannough Rd, Hyannis, MA 02601",
+        //    "description": "Top cinema with a perfect sound and giant screens",
+        //    "phoneNumber": "+18444627342",
+        //    "workingTime": "14:00-24:00",
+        //    "imageUrl": "https://photos.cinematreasures.org/production/photos/180880/1473719218/large.jpg?1473719218"
+        //}
+
         return "hello-world";
     }
 
