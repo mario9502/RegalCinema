@@ -6,15 +6,24 @@ import bg.softuni.regalcinema.model.dtos.AddMarathonDto;
 import bg.softuni.regalcinema.repo.MarathonRepository;
 import bg.softuni.regalcinema.repo.MovieRepository;
 import bg.softuni.regalcinema.service.MarathonService;
+import org.modelmapper.AbstractProvider;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.Provider;
+import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MarathonServiceImpl implements MarathonService {
+
+    private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm";
 
     private final MarathonRepository marathonRepository;
     private final MovieRepository movieRepository;
@@ -33,22 +42,30 @@ public class MarathonServiceImpl implements MarathonService {
             return false; //TODO throw an exception if marathon with the same name already exists
         }
 
+//        TypeMap<AddMarathonDto, Marathon> typeMap = modelMapper.createTypeMap(AddMarathonDto.class, Marathon.class);
+//        typeMap.addMappings(mapper -> mapper.skip((marathon, o) -> marathon.setMovies(List.of())));
+//        Marathon marathon = typeMap.map(marathonDto);
+
         Marathon marathon = modelMapper.map(marathonDto, Marathon.class);
-        //TODO make the modelMapper map the movies list properly
 
         marathon.setMovies(new ArrayList<>());
         marathonDto.getMovies().forEach(movie -> {
-            Movie optMovie = movieRepository.findByTitle(movie).orElse(null);
+            Movie optMovie = movieRepository.findByTitle(movie).orElse(null); //TODO throw and exception instead of null
             marathon.addMovie(optMovie);
         });
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
+        marathon.setStart(LocalDateTime.parse(marathonDto.getStart(), formatter));
+        marathon.setEnd(LocalDateTime.parse(marathonDto.getEnd(), formatter));
+
+        this.marathonRepository.save(marathon);
+
+        return true;
 //        marathon.setMovies(
 //                marathonDto.getMovies()
 //                .stream()
 //                .map(movie -> movieRepository.findByTitle(movie).orElse(null))
 //                .toList()
 //        );
-
-        return true;
     }
 }

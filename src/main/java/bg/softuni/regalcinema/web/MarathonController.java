@@ -20,7 +20,9 @@ public class MarathonController {
     @PostMapping("/add")
     public String doAdd(@RequestBody AddMarathonDto marathonDto){
 
-        this.marathonService.add(marathonDto);
+        if (!this.marathonService.add(marathonDto)) {
+            return "oops";
+        }
 
         //{
         //    "name": "2024 Summer Mega Marathon",
