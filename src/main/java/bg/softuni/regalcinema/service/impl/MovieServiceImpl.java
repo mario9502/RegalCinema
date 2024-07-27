@@ -30,9 +30,6 @@ public class MovieServiceImpl implements MovieService {
 
         Movie mappedMovie = modelMapper.map(movieDto, Movie.class);
 
-        LocalDate premiereDate = LocalDate.parse(movieDto.getPremiere(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        mappedMovie.setPremiere(premiereDate); //TODO make modelmapper parse the date
-
         movieRepository.save(mappedMovie);
 
         return true;

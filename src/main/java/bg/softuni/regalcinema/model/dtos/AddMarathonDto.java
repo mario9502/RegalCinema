@@ -1,13 +1,17 @@
 package bg.softuni.regalcinema.model.dtos;
 
 import bg.softuni.regalcinema.model.Movie;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AddMarathonDto {
+
+    private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm";
 
     @NotBlank
     @Size(min = 5, max = 100)
@@ -17,13 +21,11 @@ public class AddMarathonDto {
     @Size(min = 5, max = 150)
     private String location;
 
-    @NotBlank
-    @Size(min = 5, max = 100)
-    private String start;
+    @JsonFormat(pattern = DATE_TIME_FORMAT)
+    private LocalDateTime start;
 
-    @NotBlank
-    @Size(min = 5, max = 100)
-    private String end;
+    @JsonFormat(pattern = DATE_TIME_FORMAT)
+    private LocalDateTime end;
 
     private List<String> movies;
 
@@ -42,11 +44,11 @@ public class AddMarathonDto {
         this.description = description;
     }
 
-    public String getEnd() {
+    public LocalDateTime getEnd() {
         return end;
     }
 
-    public void setEnd(String end) {
+    public void setEnd(LocalDateTime end) {
         this.end = end;
     }
 
@@ -74,11 +76,11 @@ public class AddMarathonDto {
         this.name = name;
     }
 
-    public String getStart() {
+    public LocalDateTime getStart() {
         return start;
     }
 
-    public void setStart(String start) {
+    public void setStart(LocalDateTime start) {
         this.start = start;
     }
 }

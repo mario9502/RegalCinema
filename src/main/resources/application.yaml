@@ -2,7 +2,7 @@ spring:
   application:
     name: RegalCinemas
   jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
+#    database-platform: org.hibernate.dialect.MySQLDialect
     properties:
       hibernate:
         format_sql: 'TRUE'
@@ -17,7 +17,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: 'root'
     password: '12345'
-    url: jdbc:mysql://localhost:3306/regal-cinemas?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/regal-cinemas?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=LOCAL
   thymeleaf: # Thymeleaf
     cache: false
     mode: HTML

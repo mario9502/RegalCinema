@@ -46,17 +46,10 @@ public class MarathonServiceImpl implements MarathonService {
 //        typeMap.addMappings(mapper -> mapper.skip((marathon, o) -> marathon.setMovies(List.of())));
 //        Marathon marathon = typeMap.map(marathonDto);
 
-        Marathon marathon = modelMapper.map(marathonDto, Marathon.class);
+        Marathon marathon = modelMapper.map(marathonDto, Marathon.class); //TODO try to make the modelMapper .skip work on movies list
 
         marathon.setMovies(new ArrayList<>());
-        marathonDto.getMovies().forEach(movie -> {
-            Movie optMovie = movieRepository.findByTitle(movie).orElse(null); //TODO throw and exception instead of null
-            marathon.addMovie(optMovie);
-        });
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
-        marathon.setStart(LocalDateTime.parse(marathonDto.getStart(), formatter));
-        marathon.setEnd(LocalDateTime.parse(marathonDto.getEnd(), formatter));
+        addMovies(marathonDto, marathon);
 
         this.marathonRepository.save(marathon);
 
@@ -67,5 +60,12 @@ public class MarathonServiceImpl implements MarathonService {
 //                .map(movie -> movieRepository.findByTitle(movie).orElse(null))
 //                .toList()
 //        );
+    }
+
+    public void addMovies(AddMarathonDto marathonDto, Marathon marathon) {
+        marathonDto.getMovies().forEach(movie -> {
+            Movie optMovie = movieRepository.findByTitle(movie).orElse(null); //TODO throw and exception instead of null
+            marathon.addMovie(optMovie);
+        });
     }
 }

@@ -3,9 +3,12 @@ package bg.softuni.regalcinema.model.dtos;
 
 import bg.softuni.regalcinema.model.enums.Audio;
 import bg.softuni.regalcinema.model.enums.Genre;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+
+import java.time.LocalDate;
 
 public class AddMovieDto {
 
@@ -27,10 +30,14 @@ public class AddMovieDto {
     @Positive
     private int lengthInMinutes;
 
-    private String premiere;
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate premiere;
 
     @Size(min = 10, max = 200)
     private String videoUrl;
+
+    @Size(min = 10, max = 200)
+    private String imageUrl;
 
     private Audio audio;
 
@@ -70,11 +77,11 @@ public class AddMovieDto {
         this.lengthInMinutes = lengthInMinutes;
     }
 
-    public String getPremiere() {
+    public LocalDate getPremiere() {
         return premiere;
     }
 
-    public void setPremiere(String premiere) {
+    public void setPremiere(LocalDate premiere) {
         this.premiere = premiere;
     }
 
@@ -108,5 +115,13 @@ public class AddMovieDto {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

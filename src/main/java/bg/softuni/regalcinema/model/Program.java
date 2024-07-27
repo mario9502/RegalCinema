@@ -1,29 +1,24 @@
 package bg.softuni.regalcinema.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-
+import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "programs")
 public class Program extends BaseEntity {
 
-    @OneToMany
+    @OneToMany(mappedBy = "program")
     private List<Cinema> cinemas;
 
-    @OneToMany
-    private List<Movie> movies;
+    @Column(name = "movies_info", nullable = false)
+    private String moviesInfo;
 
-    @Column(nullable = false)
-    private String startHour;
+    @Column(nullable = false, unique = true)
+    private LocalDate date;
 
-    @Column(nullable = false)
-    private double ticketPrice;
-
-    public Program() {}
+    public Program() {this.cinemas = new ArrayList<>();}
 
     public List<Cinema> getCinemas() {
         return cinemas;
@@ -33,27 +28,23 @@ public class Program extends BaseEntity {
         this.cinemas = cinemas;
     }
 
-    public List<Movie> getMovies() {
-        return movies;
+    public String getMoviesInfo() {
+        return moviesInfo;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
+    public void setMoviesInfo(String moviesInfo) {
+        this.moviesInfo = moviesInfo;
     }
 
-    public String getStartHour() {
-        return startHour;
+    public void addCinema(Cinema cinema){
+        this.cinemas.add(cinema);
     }
 
-    public void setStartHour(String startHour) {
-        this.startHour = startHour;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public double getTicketPrice() {
-        return ticketPrice;
-    }
-
-    public void setTicketPrice(double ticketPrice) {
-        this.ticketPrice = ticketPrice;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

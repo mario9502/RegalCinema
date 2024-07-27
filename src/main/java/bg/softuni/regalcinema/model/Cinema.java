@@ -1,9 +1,6 @@
 package bg.softuni.regalcinema.model;
 
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cinemas")
@@ -26,6 +23,9 @@ public class Cinema extends BaseEntity {
 
     @Column(nullable = false, name = "working_time")
     private String workingTime;
+
+    @ManyToOne
+    private Program program;
 
     public Cinema() {}
 
@@ -75,5 +75,13 @@ public class Cinema extends BaseEntity {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Program getProgram() {
+        return program;
+    }
+
+    public void setProgram(Program program) {
+        this.program = program;
     }
 }
