@@ -30,6 +30,10 @@ public class Marathon extends BaseEntity {
 
     private String description;
 
+    @Column(nullable = false)
+    private double price;
+    //TODO implement the price field
+
     public Marathon() {this.movies = new ArrayList<>();}
 
     public String getName() {
@@ -82,5 +86,13 @@ public class Marathon extends BaseEntity {
 
     public void addMovie(Movie movie) {
         this.movies.add(movie);
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

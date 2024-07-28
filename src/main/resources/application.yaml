@@ -18,21 +18,23 @@ spring:
     username: 'root'
     password: '12345'
     url: jdbc:mysql://localhost:3306/regal-cinemas?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=LOCAL
-  thymeleaf: # Thymeleaf
-    cache: false
-    mode: HTML
-    encoding: UTF-8
-    prefix: file:src/main/resources/templates/
-    resources: # Static resources
-      static-locations: file:src/main/resources/static/
-      cache:
-        period: 0
+#  thymeleaf: # Thymeleaf
+#    cache: false
+#    mode: HTML
+#    encoding: UTF-8
+#    prefix: file:src/main/resources/templates/
+#    resources: # Static resources
+#      static-locations: file:src/main/resources/static/
+#      cache:
+#        period: 0
+  thymeleaf:
+    enabled: false
   sql:
     init:
       mode: never
-  devtools:
-    livereload:
-      enabled: true
+#  devtools:
+#    livereload:
+#      enabled: true
 
 logging:
   level:
@@ -45,3 +47,7 @@ logging:
     blog: WARN
 server:
   port: 8080
+
+movie:
+  api:
+    baseUrl: "http://localhost:8081"

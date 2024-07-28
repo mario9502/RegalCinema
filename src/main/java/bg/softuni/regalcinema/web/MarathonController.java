@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/marathon")
+@RequestMapping("/marathons")
 public class MarathonController {
 
     private final MarathonServiceImpl marathonService;

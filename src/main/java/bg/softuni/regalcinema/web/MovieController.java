@@ -3,12 +3,10 @@ package bg.softuni.regalcinema.web;
 import bg.softuni.regalcinema.model.dtos.AddMovieDto;
 import bg.softuni.regalcinema.service.impl.MovieServiceImpl;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/movie")
+@RequestMapping("/movies")
 public class MovieController {
 
     private final MovieServiceImpl movieService;
@@ -18,12 +16,26 @@ public class MovieController {
     }
 
     @PostMapping("/add")
-    public String doAdd(@RequestBody AddMovieDto movieDto){
+    public void doAdd(@RequestBody AddMovieDto movieDto) {
 
-        if (!this.movieService.add(movieDto)) {
-            return "oops";
-        }
+        this.movieService.add(movieDto);
 
-        return "hello-world";
+//        if (!this.movieService.add(movieDto)) {
+//            return "oops";
+//        }
+//
+//        return "hello-world";
+    }
+
+    @GetMapping("/{id}")
+    public void getMovieInfo(@PathVariable Long id) {
+
+        this.movieService.getMovieInfo(id);
+    }
+
+    @GetMapping("/all")
+    public void getAll(){
+
+        this.movieService.getAll();
     }
 }
