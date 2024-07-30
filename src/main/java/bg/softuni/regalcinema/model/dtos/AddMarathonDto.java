@@ -3,6 +3,8 @@ package bg.softuni.regalcinema.model.dtos;
 import bg.softuni.regalcinema.model.Movie;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
@@ -31,6 +33,10 @@ public class AddMarathonDto {
 
     @Size(min = 15, max = 300)
     private String description;
+
+    @NotNull
+    @PositiveOrZero
+    private double price;
 
     public AddMarathonDto() {
         this.movies = new ArrayList<>();
@@ -82,5 +88,13 @@ public class AddMarathonDto {
 
     public void setStart(LocalDateTime start) {
         this.start = start;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

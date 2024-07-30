@@ -2,10 +2,8 @@ package bg.softuni.regalcinema.web;
 
 import bg.softuni.regalcinema.model.dtos.UserRegisterDto;
 import bg.softuni.regalcinema.service.impl.UserServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/users")
@@ -17,16 +15,19 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ModelAttribute("registerData")
+    private UserRegisterDto userRegisterDto(){
+        return new UserRegisterDto();
+    }
+
     @GetMapping("/register")
-    public ModelAndView viewRegister(){
+    public String viewRegister(){
 
-        ModelAndView mnv = new ModelAndView("hello-world");
-
-        return mnv;
+        return "register";
     }
 
     @PostMapping("/register")
-    public String doRegister(@RequestBody @Valid UserRegisterDto registerDto){
+    public String doRegister(UserRegisterDto registerDto){
 
         if (!this.userService.register(registerDto)) {
             return "oops";

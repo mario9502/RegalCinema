@@ -32,7 +32,6 @@ public class Marathon extends BaseEntity {
 
     @Column(nullable = false)
     private double price;
-    //TODO implement the price field
 
     public Marathon() {this.movies = new ArrayList<>();}
 
