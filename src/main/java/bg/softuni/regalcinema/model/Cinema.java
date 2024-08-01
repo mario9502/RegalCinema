@@ -2,6 +2,9 @@ package bg.softuni.regalcinema.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "cinemas")
 public class Cinema extends BaseEntity {
@@ -24,10 +27,22 @@ public class Cinema extends BaseEntity {
     @Column(nullable = false, name = "working_time")
     private String workingTime;
 
-    @ManyToOne
-    private Program program;
+    @ManyToMany(mappedBy = "cinemas")
+    private List<Program> programs;
 
-    public Cinema() {}
+    public Cinema() {
+        this.programs = new ArrayList<>();
+    }
+
+    public Cinema(String name, String location, String phoneNumber, String workingTime, String description, String imageUrl) {
+        this();
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.location = location;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.workingTime = workingTime;
+    }
 
     public String getName() {
         return name;
@@ -77,11 +92,11 @@ public class Cinema extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    public Program getProgram() {
-        return program;
+    public List<Program> getPrograms() {
+        return programs;
     }
 
-    public void setProgram(Program program) {
-        this.program = program;
+    public void setPrograms(List<Program> program) {
+        this.programs = program;
     }
 }

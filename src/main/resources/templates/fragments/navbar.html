@@ -45,13 +45,15 @@
                 <li class="nav-item dropdown">
 <!--                    sec:authorize="hasRole('ADMIN')"-->
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<!--                       th:classappend="${activeLink == 'admin'}? 'active'">-->
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                       th:classappend="${activeLink == 'admin'}? 'active'">
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/">Action</a>
-                        <a class="dropdown-item" href="/">Another action</a>
+                        <a class="dropdown-item" th:href="@{/movies/add}">Add Movie</a>
+                        <a class="dropdown-item" th:href="@{/cinemas/add}">Add Cinema</a>
+                        <a class="dropdown-item" th:href="@{/marathons/add}">Add Marathon</a>
+                        <a class="dropdown-item" th:href="@{/programs/add}">Add Program</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/">Something else here</a>
                     </div>

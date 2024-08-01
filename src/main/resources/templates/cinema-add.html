@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en"
+        xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Regal Cinemas</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{/fragments/navbar::navbar(activeLink=${'add cinema'})}"></div>
+
+<div class="container">
+    <h2 class="text-center text-white">Add Cinema</h2>
+    <form   th:method="POST"
+            th:action="@{/cinemas/add}"
+            th:object="${cinemaData}"
+            class="mx-auto col-md-8 d-flex flex-column justify-content-center w-75">
+
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label th:for="name" class="text-white font-weight-bold">Name</label>
+                <input th:field="*{name}" id="name" name="name" type="text" class="form-control"
+                       placeholder="Name"/>
+                <p  class="invalid-feedback errors alert alert-danger">
+                    Name is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label th:for="location" class="text-white font-weight-bold">Location</label>
+                <input th:field="*{location}" id="location" name="location" type="text" class="form-control"
+                       placeholder="Location"/>
+                <p  class="invalid-feedback errors alert alert-danger">
+                    Location is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6 mb-3">
+                <label th:for="phoneNumber" class="text-white font-weight-bold">Phone Number</label>
+                <input th:field="*{phoneNumber}" id="phoneNumber" name="phoneNumber" type="text" class="form-control"
+                       placeholder="Phone Number"/>
+                <p  class="invalid-feedback errors alert alert-danger">
+                    Phone Number is required.
+                </p>
+            </div>
+            <div class="form-group col-md-6 mb-3">
+                <label th:for="workingTime" class="text-white font-weight-bold">Working Time</label>
+                <input th:field="*{workingTime}" id="workingTime" name="workingTime" type="text" class="form-control"
+                       placeholder="Working Time"/>
+                <p class="invalid-feedback errors alert alert-danger">
+                    Working Time is required.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label th:for="description" class="text-white font-weight-bold">Description</label>
+            <textarea th:field="*{description}" id="description" name="description" type="textarea" class="form-control" rows="3"
+                      placeholder="Description"></textarea>
+            <p class="invalid-feedback errors alert alert-danger">
+                Description is required.
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label th:for="imageUrl" class="text-white font-weight-bold">Image URL</label>
+            <input th:field="*{imageUrl}" id="imageUrl" type="url" class="form-control"
+                   placeholder="Put cinema image URL here">
+            <p class="invalid-feedback errors alert alert-danger">
+                Cinema image URL is required.
+            </p>
+        </div>
+
+        <div class="row">
+            <div class="col col-md-4">
+                <div class="button-holder d-flex">
+                    <input type="submit" class="btn btn-info btn-lg" value="Submit"/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <footer> </footer>
+</div>
+
+</body>
+</html>

@@ -9,13 +9,13 @@ import java.util.List;
 @Table(name = "programs")
 public class Program extends BaseEntity {
 
-    @OneToMany(mappedBy = "program")
+    @ManyToMany
     private List<Cinema> cinemas;
 
     @Column(name = "movies_info", nullable = false)
     private String moviesInfo;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private LocalDate date;
 
     public Program() {this.cinemas = new ArrayList<>();}

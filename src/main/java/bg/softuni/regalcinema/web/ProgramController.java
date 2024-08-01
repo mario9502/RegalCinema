@@ -4,6 +4,8 @@ import bg.softuni.regalcinema.model.dtos.AddProgramDto;
 import bg.softuni.regalcinema.model.dtos.ProgramMovieInfoDto;
 import bg.softuni.regalcinema.service.impl.ProgramServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +20,28 @@ public class ProgramController {
         this.programService = programService;
     }
 
+    @ModelAttribute("programData")
+    private AddProgramDto programDto(){
+        return new AddProgramDto();
+    }
+
+    @GetMapping("/add")
+    public String viewAdd(Model model){
+
+        model.addAttribute("cinemas" ,this.programService.getAllCinemas());
+
+        return "program-add";
+    }
+
     @PostMapping("/add")
-    public String doAdd(@RequestBody AddProgramDto programDto){
+    @Transactional
+    public String doAdd(AddProgramDto programDto){
 
-        this.programService.add(programDto);
+        if (!this.programService.add(programDto)) {
+            return "oops";
+        }
 
-        return "hello-world";
+        return "redirect:/programs/add";
     }
 
     @GetMapping("/view/{date}")

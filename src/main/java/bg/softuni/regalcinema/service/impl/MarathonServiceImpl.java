@@ -18,6 +18,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -63,7 +64,8 @@ public class MarathonServiceImpl implements MarathonService {
     }
 
     public void addMovies(AddMarathonDto marathonDto, Marathon marathon) {
-        marathonDto.getMovies().forEach(movie -> {
+
+        Arrays.stream(marathonDto.getMovies().split(", ")).forEach(movie -> {
             Movie optMovie = movieRepository.findByTitle(movie).orElse(null); //TODO throw and exception instead of null
             marathon.addMovie(optMovie);
         });
