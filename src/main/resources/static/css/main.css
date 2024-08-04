@@ -37,11 +37,11 @@ td, th {
 }
 
 .card.offer, .offer-details .list-group-item {
-     background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));
+     background-image: linear-gradient(to bottom right, rgba(42, 135, 132, 0.9), rgba(255, 255, 255, 0.9));
 }
 .card-img-top-wrapper {
-     height: 150px;
-     overflow:hidden;
+     height: 370px;
+     overflow:visible;
 }
 
 form.main-form {

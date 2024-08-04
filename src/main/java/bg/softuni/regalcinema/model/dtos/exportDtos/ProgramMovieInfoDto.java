@@ -1,4 +1,4 @@
-package bg.softuni.regalcinema.model.dtos;
+package bg.softuni.regalcinema.model.dtos.exportDtos;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

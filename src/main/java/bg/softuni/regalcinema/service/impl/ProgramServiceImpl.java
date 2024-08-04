@@ -3,15 +3,14 @@ package bg.softuni.regalcinema.service.impl;
 import bg.softuni.regalcinema.model.Cinema;
 import bg.softuni.regalcinema.model.Movie;
 import bg.softuni.regalcinema.model.Program;
-import bg.softuni.regalcinema.model.dtos.AddProgramDto;
-import bg.softuni.regalcinema.model.dtos.ProgramMovieInfoDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.AddProgramDto;
+import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramMovieInfoDto;
 import bg.softuni.regalcinema.repo.CinemaRepository;
 import bg.softuni.regalcinema.repo.MovieRepository;
 import bg.softuni.regalcinema.repo.ProgramRepository;
 import bg.softuni.regalcinema.service.ProgramService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

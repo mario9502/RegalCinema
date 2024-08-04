@@ -1,4 +1,4 @@
-package bg.softuni.regalcinema.model.dtos;
+package bg.softuni.regalcinema.model.dtos.importDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;

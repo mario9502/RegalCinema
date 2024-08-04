@@ -1,7 +1,7 @@
 package bg.softuni.regalcinema.web;
 
-import bg.softuni.regalcinema.model.dtos.AddProgramDto;
-import bg.softuni.regalcinema.model.dtos.ProgramMovieInfoDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.AddProgramDto;
+import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramMovieInfoDto;
 import bg.softuni.regalcinema.service.impl.ProgramServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

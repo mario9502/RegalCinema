@@ -1,7 +1,7 @@
 package bg.softuni.regalcinema.service;
 
-import bg.softuni.regalcinema.model.dtos.AddProgramDto;
-import bg.softuni.regalcinema.model.dtos.ProgramMovieInfoDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.AddProgramDto;
+import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramMovieInfoDto;
 
 import java.util.List;
 

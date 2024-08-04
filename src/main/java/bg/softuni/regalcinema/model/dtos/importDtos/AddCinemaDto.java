@@ -1,4 +1,4 @@
-package bg.softuni.regalcinema.model.dtos;
+package bg.softuni.regalcinema.model.dtos.importDtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

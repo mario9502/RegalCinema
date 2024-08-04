@@ -1,7 +1,7 @@
 package bg.softuni.regalcinema.service.impl;
 
 import bg.softuni.regalcinema.model.User;
-import bg.softuni.regalcinema.model.dtos.UserRegisterDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.UserRegisterDto;
 import bg.softuni.regalcinema.model.enums.UserRole;
 import bg.softuni.regalcinema.repo.UserRepository;
 import bg.softuni.regalcinema.service.UserService;

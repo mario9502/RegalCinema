@@ -1,4 +1,4 @@
-package bg.softuni.regalcinema.model.dtos;
+package bg.softuni.regalcinema.model.dtos.exportDtos;
 
 
 import bg.softuni.regalcinema.model.enums.Audio;
@@ -10,7 +10,9 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-public class AddMovieDto {
+public class MovieInfoDto {
+
+    private long id;
 
     @NotBlank
     @Size(min = 2, max = 50)
@@ -43,7 +45,15 @@ public class AddMovieDto {
 
     private Genre genre;
 
-    public AddMovieDto() {}
+    public MovieInfoDto() {}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getActors() {
         return actors;

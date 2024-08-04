@@ -1,6 +1,6 @@
 package bg.softuni.regalcinema.web;
 
-import bg.softuni.regalcinema.model.dtos.UserRegisterDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.UserRegisterDto;
 import bg.softuni.regalcinema.service.impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

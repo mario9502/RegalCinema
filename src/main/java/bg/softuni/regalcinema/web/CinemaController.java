@@ -1,8 +1,7 @@
 package bg.softuni.regalcinema.web;
 
-import bg.softuni.regalcinema.model.dtos.AddCinemaDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.AddCinemaDto;
 import bg.softuni.regalcinema.service.impl.CinemaServiceImpl;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 

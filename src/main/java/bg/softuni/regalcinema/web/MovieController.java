@@ -1,6 +1,7 @@
 package bg.softuni.regalcinema.web;
 
-import bg.softuni.regalcinema.model.dtos.AddMovieDto;
+import bg.softuni.regalcinema.model.dtos.exportDtos.ShortMovieInfoDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.AddMovieDto;
 import bg.softuni.regalcinema.model.enums.Audio;
 import bg.softuni.regalcinema.model.enums.Genre;
 import bg.softuni.regalcinema.service.impl.MovieServiceImpl;
@@ -18,7 +19,7 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @ModelAttribute("movieData")
+    @ModelAttribute("addMovieData")
     private AddMovieDto movieDto(){
         return new AddMovieDto();
     }
@@ -37,7 +38,7 @@ public class MovieController {
 
         this.movieService.add(movieDto);
 
-        return "movie-add";
+        return "redirect:/movies/add";
 //        if (!this.movieService.add(movieDto)) {
 //            return "oops";
 //        }
@@ -46,14 +47,24 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public void getMovieInfo(@PathVariable Long id) {
+    public String getMovieInfo(@PathVariable Long id, Model model) {
 
-        this.movieService.getMovieInfo(id);
+        model.addAttribute("movieInfo", this.movieService.getMovieInfo(id));
+
+        return "movie-details";
     }
 
-    @GetMapping("/all")
-    public void getAll(){
+    @ModelAttribute("shortMovieData")
+    private ShortMovieInfoDto shortMovieInfoDto(){
 
-        this.movieService.getAll();
+        return new ShortMovieInfoDto();
+    }
+
+    @GetMapping
+    public String getAll(Model model){
+
+        model.addAttribute("allMovies", this.movieService.getAllShortInfo());
+
+        return "movies";
     }
 }

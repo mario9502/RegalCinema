@@ -1,12 +1,16 @@
 package bg.softuni.regalcinema.service.impl;
 
-import bg.softuni.regalcinema.model.dtos.AddMovieDto;
-import bg.softuni.regalcinema.model.dtos.ProgramMovieInfoDto;
+import bg.softuni.regalcinema.model.dtos.exportDtos.MovieInfoDto;
+import bg.softuni.regalcinema.model.dtos.exportDtos.ShortMovieInfoDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.AddMovieDto;
+import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramMovieInfoDto;
 import bg.softuni.regalcinema.repo.MovieRepository;
 import bg.softuni.regalcinema.service.MovieService;
 import org.modelmapper.ModelMapper;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -45,22 +49,34 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void getMovieInfo(Long id) {
+    public MovieInfoDto getMovieInfo(Long id) {
 
-        ProgramMovieInfoDto body = this.restClient
+        MovieInfoDto body = this.restClient
                 .get()
                 .uri("/movies/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .body(ProgramMovieInfoDto.class);
+                .body(MovieInfoDto.class);
 
-        System.out.println();
+        return body;
+    }
+
+    @Override
+    public List<ShortMovieInfoDto> getAllShortInfo() {
+
+        return this.restClient
+                .get()
+                .uri("/movies/all")
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(new ParameterizedTypeReference<>() {
+                });
     }
 
     @Override
     public void getAll() {
 
-        List<ProgramMovieInfoDto> list = this.restClient
+            List<MovieInfoDto> moviesInfo = this.restClient
                 .get()
                 .uri("/movies/all")
                 .accept(MediaType.APPLICATION_JSON)

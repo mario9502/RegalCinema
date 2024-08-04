@@ -1,6 +1,6 @@
 package bg.softuni.regalcinema.web;
 
-import bg.softuni.regalcinema.model.dtos.AddMarathonDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.AddMarathonDto;
 import bg.softuni.regalcinema.service.impl.MarathonServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

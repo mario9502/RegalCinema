@@ -2,24 +2,15 @@ package bg.softuni.regalcinema.service.impl;
 
 import bg.softuni.regalcinema.model.Marathon;
 import bg.softuni.regalcinema.model.Movie;
-import bg.softuni.regalcinema.model.dtos.AddMarathonDto;
+import bg.softuni.regalcinema.model.dtos.importDtos.AddMarathonDto;
 import bg.softuni.regalcinema.repo.MarathonRepository;
 import bg.softuni.regalcinema.repo.MovieRepository;
 import bg.softuni.regalcinema.service.MarathonService;
-import org.modelmapper.AbstractProvider;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.Provider;
-import org.modelmapper.TypeMap;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class MarathonServiceImpl implements MarathonService {
