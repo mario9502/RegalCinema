@@ -16,6 +16,10 @@ body {
      padding-top: 90px;
 }
 
+.container, .container-fluid1 {
+     padding-top: 40px;
+}
+
 .bg-text {
      background-color: rgb(0,0,0); /* Fallback color */
      background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
@@ -28,20 +32,26 @@ body {
      text-align: center;
 }
 
-.brand-section {
-     background-image: linear-gradient(to bottom right, rgba(220, 220, 220, 0.9), rgba(255, 255, 255, 0.9));
-}
-
 td, th {
      padding: 3px 8px;
 }
 
-.card.offer, .offer-details .list-group-item {
+.card.movie, .movie-details .list-group-item {
      background-image: linear-gradient(to bottom right, rgba(42, 135, 132, 0.9), rgba(255, 255, 255, 0.9));
 }
-.card-img-top-wrapper {
+.movie-card-img-top-wrapper {
      height: 370px;
      overflow:visible;
+}
+
+.card.cinema, .cinema-details .list-group-item {
+     background-image: repeating-linear-gradient(to bottom left, rgba(109, 30, 204, 0.9), rgb(255, 255, 255));
+}
+
+.cinema-card-img-top-wrapper {
+     height: 370px;
+     overflow:hidden;
+     border-bottom: black;
 }
 
 form.main-form {

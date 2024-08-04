@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Programs</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/main.css"/>
+    <script src="/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div th:replace="~{/fragments/navbar::navbar(activeLink=${'programs'})}"></div>
+
+<div class="container-fluid">
+    <div class="card-body text-center">
+        <a th:each="program: ${allPrograms}" class="card-link"
+           th:href="@{/programs/{cinemaId}/{date}(cinemaId = ${cinemaId}, date = ${program.date})}">
+            <span th:text="${program.date.toString()}"> Some date </span>
+        </a>
+        <br>
+        <a th:each="program: ${allPrograms}" class="card-link"
+           th:href="@{/programs/{cinemaId}/{date}(cinemaId = ${cinemaId}, date = ${program.date})}">
+            <span th:text="${program.date.getDayOfWeek().toString()}"> Some date </span>
+        </a>
+    </div>
+
+</div>
+</body>
+</html>

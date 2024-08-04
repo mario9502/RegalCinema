@@ -49,7 +49,17 @@ public class MovieController {
     @GetMapping("/{id}")
     public String getMovieInfo(@PathVariable Long id, Model model) {
 
-        model.addAttribute("movieInfo", this.movieService.getMovieInfo(id));
+        model.addAttribute("movieInfo", this.movieService.getMovieInfoById(id));
+        //TODO fix the youtube section
+
+        return "movie-details";
+    }
+
+    @GetMapping("/title={title}")
+    public String getMovieInfoByTitle(@PathVariable String title, Model model) {
+
+        model.addAttribute("movieInfo", this.movieService.getMovieInfoByTitle(title));
+        //TODO fix the youtube section
 
         return "movie-details";
     }
@@ -61,10 +71,18 @@ public class MovieController {
     }
 
     @GetMapping
-    public String getAll(Model model){
+    public String viewAll(Model model){
 
         model.addAttribute("allMovies", this.movieService.getAllShortInfo());
 
         return "movies";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id){
+
+        this.movieService.deleteById(id);
+
+        return "redirect:/movies";
     }
 }

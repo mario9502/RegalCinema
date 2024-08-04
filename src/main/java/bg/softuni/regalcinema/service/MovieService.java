@@ -9,9 +9,11 @@ import java.util.List;
 public interface MovieService {
     void add(AddMovieDto movieDto);
 
-    MovieInfoDto getMovieInfo(Long id);
+    MovieInfoDto getMovieInfoById(Long id);
+
+    MovieInfoDto getMovieInfoByTitle(String title);
 
     List<ShortMovieInfoDto> getAllShortInfo();
 
-    void getAll();
+    void deleteById(Long id);
 }

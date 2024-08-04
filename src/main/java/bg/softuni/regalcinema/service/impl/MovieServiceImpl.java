@@ -19,13 +19,9 @@ import java.util.List;
 @Service
 public class MovieServiceImpl implements MovieService {
 
-    private final MovieRepository movieRepository;
-    private final ModelMapper modelMapper;
     private final RestClient restClient;
 
-    public MovieServiceImpl(MovieRepository movieRepository, ModelMapper modelMapper, RestClient restClient) {
-        this.movieRepository = movieRepository;
-        this.modelMapper = modelMapper;
+    public MovieServiceImpl(RestClient restClient) {
         this.restClient = restClient;
     }
 
@@ -49,16 +45,25 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public MovieInfoDto getMovieInfo(Long id) {
+    public MovieInfoDto getMovieInfoById(Long id) {
 
-        MovieInfoDto body = this.restClient
+        return this.restClient
                 .get()
                 .uri("/movies/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .body(MovieInfoDto.class);
+    }
 
-        return body;
+    @Override
+    public MovieInfoDto getMovieInfoByTitle(String title) {
+
+        return this.restClient
+                .get()
+                .uri("/movies/title={title}", title)
+                .accept(MediaType.APPLICATION_JSON)
+                .retrieve()
+                .body(MovieInfoDto.class);
     }
 
     @Override
@@ -74,16 +79,12 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void getAll() {
+    public void deleteById(Long id) {
 
-            List<MovieInfoDto> moviesInfo = this.restClient
-                .get()
-                .uri("/movies/all")
+        this.restClient
+                .delete()
+                .uri("/movies/{id}", id)
                 .accept(MediaType.APPLICATION_JSON)
-                .retrieve()
-                .body(new ParameterizedTypeReference<>() {
-                });
-
-        System.out.println();
+                .retrieve();
     }
 }

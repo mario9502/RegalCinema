@@ -10,7 +10,7 @@
 
 <div th:fragment="navbar(activeLink)">
     <nav class="navbar navbar-expand-lg bg-danger navbar-light fixed-top">
-        <a class="navbar-brand" href="/"><img alt="logo picture" src="/images/logo.png" class="logo"></a>
+        <a class="navbar-brand" th:href="@{/}"><img alt="logo picture" src="/images/logo.png" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -20,9 +20,9 @@
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
                 <li class="nav-item">
 <!--                    sec:authorize="isAuthenticated()"-->
-                    <a class="nav-link">
-<!--                       th:href="@{/brands/all}"-->
-<!--                       th:classappend="${activeLink == 'all brands'}? 'active'">-->
+                    <a class="nav-link"
+                       th:href="@{/programs}"
+                       th:classappend="${activeLink == 'programs'}? 'active'">
                         Program
                     </a>
                 </li>
@@ -30,8 +30,16 @@
 <!--                    sec:authorize="isAuthenticated()"-->
                     <a class="nav-link"
                        th:href="@{/movies}"
-                       th:classappend="${activeLink == 'movie'}? 'active'">
+                       th:classappend="${activeLink == 'all movies'}? 'active'">
                         Movies
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <!--                    sec:authorize="isAuthenticated()"-->
+                    <a class="nav-link"
+                       th:href="@{/cinemas}"
+                       th:classappend="${activeLink == 'cinemas'}? 'active'">
+                        Cinemas
                     </a>
                 </li>
                 <li class="nav-item">
@@ -54,17 +62,17 @@
                         <a class="dropdown-item" th:href="@{/cinemas/add}">Add Cinema</a>
                         <a class="dropdown-item" th:href="@{/marathons/add}">Add Marathon</a>
                         <a class="dropdown-item" th:href="@{/programs/add}">Add Program</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/">Something else here</a>
+<!--                        <div class="dropdown-divider"></div>-->
+<!--                        <a class="dropdown-item" href="/">Something else here</a>-->
                     </div>
                 </li>
                 <li class="nav-item">
 <!--                    sec:authorize="isAuthenticated()"-->
-                    <div class="form-inline my-2 my-lg-0 border px-3">
+                    <div class="form-inline my-0 my-lg-0">
 <!--                        <div class="logged-user"-->
 <!--                             text="Welcome, Gosho"></div>-->
                         <form th:method="POST" th:action="@{/users/logout}">
-                            <input class="btn btn-link" type="submit" value="Logout"/>
+                            <input class="btn bg-transparent" type="submit" value="Logout"/>
                         </form>
                     </div>
                 </li>

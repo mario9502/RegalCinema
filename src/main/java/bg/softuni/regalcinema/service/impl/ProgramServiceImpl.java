@@ -3,6 +3,8 @@ package bg.softuni.regalcinema.service.impl;
 import bg.softuni.regalcinema.model.Cinema;
 import bg.softuni.regalcinema.model.Movie;
 import bg.softuni.regalcinema.model.Program;
+import bg.softuni.regalcinema.model.dtos.exportDtos.MovieInfoDto;
+import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramInfoDto;
 import bg.softuni.regalcinema.model.dtos.importDtos.AddProgramDto;
 import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramMovieInfoDto;
 import bg.softuni.regalcinema.repo.CinemaRepository;
@@ -12,6 +14,8 @@ import bg.softuni.regalcinema.service.ProgramService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -20,13 +24,13 @@ import java.util.*;
 public class ProgramServiceImpl implements ProgramService {
 
     private final ProgramRepository programRepository;
-    private final MovieRepository movieRepository;
+    private final MovieServiceImpl movieService;
     private final CinemaRepository cinemaRepository;
     private final ModelMapper modelMapper;
 
-    public ProgramServiceImpl(ProgramRepository programRepository, MovieRepository movieRepository, CinemaRepository cinemaRepository, ModelMapper modelMapper) {
+    public ProgramServiceImpl(ProgramRepository programRepository, MovieServiceImpl movieService, CinemaRepository cinemaRepository, ModelMapper modelMapper) {
         this.programRepository = programRepository;
-        this.movieRepository = movieRepository;
+        this.movieService = movieService;
         this.cinemaRepository = cinemaRepository;
         this.modelMapper = modelMapper;
     }
@@ -56,22 +60,35 @@ public class ProgramServiceImpl implements ProgramService {
 
         // Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00
         // Harry Potter / 10.99 / 15:40, 17:00, 18:50, 21:00
-        // Dune: Part One / 16.99 / 13:40, 15:00, 16:50, 18:00
+        // Jurrasic Park / 16.99 / 14:45, 15:15, 18:30, 20:20
+        // 8 Mile / 12.99 / 14:00, 15:15, 17:30, 19:20
         return true;
     }
 
     @Override
-    public List<ProgramMovieInfoDto> getShortInfo(String date) {
+    public List<ProgramMovieInfoDto> getShortInfo(Long cinemaId, String date) {
+
+        Cinema cinema = this.cinemaRepository.findById(cinemaId).orElse(null);
+
+        Program program1 = cinema.getPrograms()
+                .stream()
+                .filter(program -> program.getDate().toString().equals(date))
+                .findAny()
+                .orElse(null);
+        //TODO throw an exception instead of null
+
         List<ProgramMovieInfoDto> resultList = new ArrayList<>();
 
-        LocalDate parsedDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-        Program program = programRepository.findByDate(parsedDate).orElse(null);
-
-        List<String> movieInfoList = Arrays.stream(program.getMoviesInfo().split("\\r\\n")).toList();
+        List<String> movieInfoList = Arrays.stream(program1.getMoviesInfo().split("\\r\\n")).toList();
         for (String movieInfo : movieInfoList) {
             String[] info = movieInfo.split(" / ");
+            String title = info[0];
 
-            Movie movie = movieRepository.findByTitle(info[0]).orElse(null);
+            if (info[0].contains(" ")) {
+                title = URLEncoder.encode(info[0], StandardCharsets.UTF_8).replace("%2B", "+");
+            }
+
+            MovieInfoDto movie = movieService.getMovieInfoByTitle(title);
             double ticketPrice = Double.parseDouble(info[1]);
 
             List<String> hoursList = Arrays.stream(info[2].split(", ")).toList();
@@ -87,6 +104,14 @@ public class ProgramServiceImpl implements ProgramService {
     @Override
     public List<String> getAllCinemas() {
         return this.cinemaRepository.findAll().stream().map(Cinema::getName).toList();
+    }
+
+    @Override
+    public List<ProgramInfoDto> findProgramsByCinemaId(Long cinemaId) {
+
+        Cinema cinema = this.cinemaRepository.findById(cinemaId).orElse(null); //TODO throw and exception instead of null
+
+        return cinema.getPrograms().stream().map(program -> modelMapper.map(program, ProgramInfoDto.class)).toList();
     }
 
 //    public void addMovies(AddProgramDto programDto, Program mappedProgram) {
