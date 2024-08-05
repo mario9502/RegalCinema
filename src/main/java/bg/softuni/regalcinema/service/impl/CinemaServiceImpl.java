@@ -6,6 +6,8 @@ import bg.softuni.regalcinema.model.dtos.exportDtos.ShortCinemaInfoDto;
 import bg.softuni.regalcinema.model.dtos.importDtos.AddCinemaDto;
 import bg.softuni.regalcinema.repo.CinemaRepository;
 import bg.softuni.regalcinema.service.CinemaService;
+import bg.softuni.regalcinema.service.exception.IllegalArgException;
+import bg.softuni.regalcinema.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -31,17 +33,15 @@ public class CinemaServiceImpl implements CinemaService {
     }
 
     @Override
-    public boolean add(AddCinemaDto addCinemaDto) {
+    public void add(AddCinemaDto addCinemaDto) {
 
         if (cinemaRepository.existsByName(addCinemaDto.getName())) {
-            return false;
+            throw new IllegalArgException("Cinema");
         }
 
         Cinema mappedCinema = modelMapper.map(addCinemaDto, Cinema.class);
 
         cinemaRepository.save(mappedCinema);
-
-        return true;
     }
 
     @Override
@@ -65,7 +65,9 @@ public class CinemaServiceImpl implements CinemaService {
     @Override
     public CinemaInfoDto findById(Long id) {
 
-        Cinema cinema = this.cinemaRepository.findById(id).orElse(null); //TODO throw exception instead of null
+        Cinema cinema = this.cinemaRepository
+                .findById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Cinema"));
 
         return modelMapper.map(cinema, CinemaInfoDto.class);
     }

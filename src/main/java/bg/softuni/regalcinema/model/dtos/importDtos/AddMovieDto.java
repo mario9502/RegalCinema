@@ -5,6 +5,7 @@ import bg.softuni.regalcinema.model.enums.Audio;
 import bg.softuni.regalcinema.model.enums.Genre;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
@@ -12,35 +13,38 @@ import java.time.LocalDate;
 
 public class AddMovieDto {
 
-    @NotBlank
-    @Size(min = 2, max = 50)
+    @NotBlank(message = "Title is required")
+    @Size(min = 2, max = 50, message = "Size must be between 2 and 50 symbols")
     private String title;
 
-    @NotBlank
-    @Size(min = 3, max = 50)
+    @NotBlank(message = "Director name is required")
+    @Size(min = 3, max = 50, message = "Size must be between 3 and 50 symbols")
     private String directorName;
 
-    @Size(min = 10, max = 100)
+    @Size(min = 10, max = 100, message = "Size must be between 10 and 100 symbols")
     private String actors;
 
-    @NotBlank
-    @Size(min = 20, max = 200)
+    @NotBlank(message = "Description is required")
+    @Size(min = 20, max = 200, message = "Size must be between 20 and 200 symbols")
     private String description;
 
-    @Positive
+    @NotNull(message = "Length is required")
+    @Positive(message = "Length must be valid")
     private int lengthInMinutes;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate premiere;
 
-    @Size(min = 10, max = 200)
+    @Size(min = 10, max = 200, message = "Size must be between 10 and 200 symbols")
     private String videoUrl;
 
-    @Size(min = 10, max = 200)
+    @Size(min = 10, max = 200, message = "Size must be between 10 and 200 symbols")
     private String imageUrl;
 
+    @NotNull(message = "Audio is required")
     private Audio audio;
 
+    @NotNull(message = "Genre is required")
     private Genre genre;
 
     public AddMovieDto() {}

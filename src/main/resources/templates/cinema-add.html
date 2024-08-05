@@ -16,7 +16,7 @@
 
 <div th:replace="~{/fragments/navbar::navbar(activeLink=${'add cinema'})}"></div>
 
-<div class="container">
+<div class="container-fluid">
     <h2 class="text-center text-white">Add Cinema</h2>
     <form   th:method="POST"
             th:action="@{/cinemas/add}"
@@ -28,7 +28,10 @@
                 <label th:for="name" class="text-white font-weight-bold">Name</label>
                 <input th:field="*{name}" id="name" name="name" type="text" class="form-control"
                        placeholder="Name"/>
-                <p  class="invalid-feedback errors alert alert-danger">
+
+                <p th:each="error :${#fields.errors('name')}"
+                   th:text="${error}"
+                   class="alert-danger">
                     Name is required.
                 </p>
             </div>
@@ -36,7 +39,10 @@
                 <label th:for="location" class="text-white font-weight-bold">Location</label>
                 <input th:field="*{location}" id="location" name="location" type="text" class="form-control"
                        placeholder="Location"/>
-                <p  class="invalid-feedback errors alert alert-danger">
+
+                <p th:each="error :${#fields.errors('location')}"
+                   th:text="${error}"
+                   class="alert-danger">
                     Location is required.
                 </p>
             </div>
@@ -47,16 +53,22 @@
                 <label th:for="phoneNumber" class="text-white font-weight-bold">Phone Number</label>
                 <input th:field="*{phoneNumber}" id="phoneNumber" name="phoneNumber" type="text" class="form-control"
                        placeholder="Phone Number"/>
-                <p  class="invalid-feedback errors alert alert-danger">
-                    Phone Number is required.
+
+                <p th:each="error :${#fields.errors('phoneNumber')}"
+                   th:text="${error}"
+                   class="alert-danger">
+                    Phone number is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label th:for="workingTime" class="text-white font-weight-bold">Working Time</label>
                 <input th:field="*{workingTime}" id="workingTime" name="workingTime" type="text" class="form-control"
                        placeholder="Working Time"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Working Time is required.
+
+                <p th:each="error :${#fields.errors('workingTime')}"
+                   th:text="${error}"
+                   class="alert-danger">
+                    Working time is required.
                 </p>
             </div>
         </div>
@@ -65,7 +77,10 @@
             <label th:for="description" class="text-white font-weight-bold">Description</label>
             <textarea th:field="*{description}" id="description" name="description" type="textarea" class="form-control" rows="3"
                       placeholder="Description"></textarea>
-            <p class="invalid-feedback errors alert alert-danger">
+
+            <p th:each="error :${#fields.errors('description')}"
+               th:text="${error}"
+               class="alert-danger">
                 Description is required.
             </p>
         </div>

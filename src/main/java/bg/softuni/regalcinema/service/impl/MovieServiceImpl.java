@@ -81,6 +81,8 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public void deleteById(Long id) {
 
+        MovieInfoDto movieInfoById = getMovieInfoById(id);
+
         this.restClient
                 .delete()
                 .uri("/movies/{id}", id)

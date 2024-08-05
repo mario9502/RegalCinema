@@ -1,4 +1,4 @@
-package bg.softuni.regalcinema.util.init;
+package bg.softuni.regalcinema.init;
 
 import bg.softuni.regalcinema.service.impl.CinemaServiceImpl;
 import org.springframework.boot.CommandLineRunner;

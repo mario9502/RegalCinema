@@ -6,6 +6,8 @@ import bg.softuni.regalcinema.model.dtos.importDtos.AddMarathonDto;
 import bg.softuni.regalcinema.repo.MarathonRepository;
 import bg.softuni.regalcinema.repo.MovieRepository;
 import bg.softuni.regalcinema.service.MarathonService;
+import bg.softuni.regalcinema.service.exception.ObjectNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -28,24 +30,23 @@ public class MarathonServiceImpl implements MarathonService {
     }
 
     @Override
-    public boolean add(AddMarathonDto marathonDto) {
+    public void add(AddMarathonDto marathonDto) {
 
         if (marathonRepository.existsByName(marathonDto.getName())) {
-            return false; //TODO throw an exception if marathon with the same name already exists
+            throw new IllegalArgumentException("Marathon already exists");
         }
 
 //        TypeMap<AddMarathonDto, Marathon> typeMap = modelMapper.createTypeMap(AddMarathonDto.class, Marathon.class);
 //        typeMap.addMappings(mapper -> mapper.skip((marathon, o) -> marathon.setMovies(List.of())));
 //        Marathon marathon = typeMap.map(marathonDto);
 
-        Marathon marathon = modelMapper.map(marathonDto, Marathon.class); //TODO try to make the modelMapper .skip work on movies list
+        Marathon marathon = modelMapper.map(marathonDto, Marathon.class);
 
         marathon.setMovies(new ArrayList<>());
         addMovies(marathonDto, marathon);
 
         this.marathonRepository.save(marathon);
 
-        return true;
 //        marathon.setMovies(
 //                marathonDto.getMovies()
 //                .stream()
@@ -57,7 +58,8 @@ public class MarathonServiceImpl implements MarathonService {
     public void addMovies(AddMarathonDto marathonDto, Marathon marathon) {
 
         Arrays.stream(marathonDto.getMovies().split(", ")).forEach(movie -> {
-            Movie optMovie = movieRepository.findByTitle(movie).orElse(null); //TODO throw and exception instead of null
+            Movie optMovie = movieRepository.findByTitle(movie).orElseThrow(() -> new ObjectNotFoundException("Movie"));
+            //TODO implement the REST API exception handler
             marathon.addMovie(optMovie);
         });
     }

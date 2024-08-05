@@ -29,10 +29,7 @@ public class MarathonController {
 
     @PostMapping("/add")
     public String doAdd(AddMarathonDto marathonDto){
-
-        if (!this.marathonService.add(marathonDto)) {
-            return "oops";
-        }
+        this.marathonService.add(marathonDto);
 
         return "hello-world";
     }

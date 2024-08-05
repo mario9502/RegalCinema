@@ -16,26 +16,28 @@
 
 <div th:replace="~{/fragments/navbar::navbar(activeLink=${'add movie'})}"></div>
 
-<div class="container">
+<div class="container-fluid">
     <h2 class="text-center text-white">Upload Movie</h2>
     <form   th:method="POST"
             th:action="@{/movies/add}"
             th:object="${addMovieData}"
             class="mx-auto col-md-8 d-flex flex-column justify-content-center w-75">
-<!--            th:object="${offerData}"-->
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
                 <label th:for="title" class="text-white font-weight-bold">Title</label>
                 <input th:field="*{title}" id="title" name="title" type="text" class="form-control"
                        placeholder="Title"/>
-                <p  class="invalid-feedback errors alert alert-danger">
+
+                <p th:each="error :${#fields.errors('title')}"
+                   th:text="${error}"
+                   class="alert-danger">
                     Title is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label th:for="model" class="text-center text-white font-weight-bold">Genre</label>
-                <select th:field="*{genre}" id="model" name="model" class="form-control">
+                <label th:for="genre" class="text-center text-white font-weight-bold">Genre</label>
+                <select th:field="*{genre}" id="genre" name="genre" class="form-control">
                     <option value="">- Select a genre -</option>
                         <option th:each="genre : ${genres}"
                                 th:value="${genre}"
@@ -43,7 +45,10 @@
                             Genre
                         </option>
                 </select>
-                <p class="invalid-feedback errors alert alert-danger">
+
+                <p th:each="error :${#fields.errors('genre')}"
+                   th:text="${error}"
+                   class="alert-danger">
                     Genre is required.
                 </p>
             </div>
@@ -55,7 +60,10 @@
                 <label th:for="directorName" class="text-white font-weight-bold">Director Name</label>
                 <input th:field="*{directorName}" id="directorName" name="directorName" type="text" class="form-control"
                        placeholder="Director name"/>
-                <p  class="invalid-feedback errors alert alert-danger">
+
+                <p th:each="error :${#fields.errors('directorName')}"
+                   th:text="${error}"
+                   class="alert-danger">
                     Director name is required.
                 </p>
             </div>
@@ -63,7 +71,10 @@
                 <label th:for="cast" class="text-white font-weight-bold">Cast</label>
                 <input th:field="*{actors}" id="cast" name="cast" type="text" class="form-control"
                        placeholder="Cast..."/>
-                <p class="invalid-feedback errors alert alert-danger">
+
+                <p th:each="error :${#fields.errors('actors')}"
+                   th:text="${error}"
+                   class="alert-danger">
                     Cast is required.
                 </p>
             </div>
@@ -76,8 +87,11 @@
                 <input th:field="*{lengthInMinutes}" id="length" name="length" type="number"
                        class="form-control"
                        placeholder="Length in minutes"/>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Length in minutes is required.
+
+                <p th:each="error :${#fields.errors('lengthInMinutes')}"
+                   th:text="${error}"
+                   class="alert-danger">
+                    Length is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
@@ -90,17 +104,23 @@
                         Audio language
                     </option>
                 </select>
-                <p class="invalid-feedback errors alert alert-danger">
-                    Audio language is required.
+
+                <p th:each="error :${#fields.errors('audio')}"
+                   th:text="${error}"
+                   class="alert-danger">
+                    Audio is required.
                 </p>
             </div>
         </div>
 
         <div class="form-group">
             <label th:for="description" class="text-white font-weight-bold">Description</label>
-            <textarea th:field="*{description}" id="description" name="description" type="textarea" class="form-control" rows="3"
+            <textarea th:field="*{description}" id="description" name="description" type="textarea" class="form-control" rows="4"
                       placeholder="Description"></textarea>
-            <p class="invalid-feedback errors alert alert-danger">
+
+            <p th:each="error :${#fields.errors('description')}"
+               th:text="${error}"
+               class="alert-danger">
                 Description is required.
             </p>
         </div>
@@ -108,26 +128,35 @@
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label th:for="imageUrl" class="text-white font-weight-bold">Image URL</label>
-                <input th:field="*{imageUrl}" id="imageUrl" type="url" class="form-control"
+                <input th:field="*{imageUrl}" id="imageUrl" name="imageUrl" type="url" class="form-control"
                        placeholder="Put movie image URL here">
-                <p class="invalid-feedback errors alert alert-danger">
-                    Movie image URL is required.
+
+                <p th:each="error :${#fields.errors('imageUrl')}"
+                   th:text="${error}"
+                   class="alert-danger">
+                    Image URL is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label th:for="videoUrl" class="text-white font-weight-bold">Trailer URL</label>
-                <input th:field="*{videoUrl}" id="videoUrl" type="url" class="form-control"
+                <input th:field="*{videoUrl}" id="videoUrl" name="videoUrl" type="url" class="form-control"
                        placeholder="Put movie trailer URL here">
-                <p class="invalid-feedback errors alert alert-danger">
-                    Movie trailer URL is required.
+
+                <p th:each="error :${#fields.errors('videoUrl')}"
+                   th:text="${error}"
+                   class="alert-danger">
+                    Trailer URL is required.
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label th:for="premiere" class="text-white font-weight-bold">Premiere</label>
-                <input th:field="*{premiere}" id="premiere" type="date" class="form-control"
+                <input th:field="*{premiere}" id="premiere" name="premiere" type="date" class="form-control"
                        placeholder="Premiere date">
-                <p class="invalid-feedback errors alert alert-danger">
-                    Premiere date is required.
+
+                <p th:each="error :${#fields.errors('premiere')}"
+                   th:text="${error}"
+                   class="alert-danger">
+                    Premiere is required.
                 </p>
             </div>
         </div>

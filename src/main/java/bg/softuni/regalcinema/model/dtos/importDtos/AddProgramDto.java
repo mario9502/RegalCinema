@@ -2,6 +2,8 @@ package bg.softuni.regalcinema.model.dtos.importDtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -9,12 +11,14 @@ import java.util.List;
 
 public class AddProgramDto {
 
+    @NotEmpty(message = "Must select a cinema")
     private List<String> cinemas;
 
-    @NotBlank
+    @NotBlank(message = "Movies info is required")
     private String moviesInfo;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
+    @NotNull(message = "Program date is required")
     private LocalDate date;
 
     public AddProgramDto() {

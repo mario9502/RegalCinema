@@ -26,11 +26,11 @@ public class UserServiceImpl implements UserService {
     public boolean register(UserRegisterDto registerDto) {
 
         if (userRepository.existsByUsernameOrEmail(registerDto.getUsername(), registerDto.getEmail())) {
-            return false;
+            return false; //TODO create a error message
         }
 
         if (!registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
-            return false;
+            return false; //TODO create a error message
         }
 
         UserEntity mappedUserEntity = modelMapper.map(registerDto, UserEntity.class);

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="https://www.thymeleaf.org">
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
      <meta charset="UTF-8">
@@ -37,15 +38,10 @@
                     <div class="text"><span> Description: <span th:text="*{description}"></span> </span></div>
                 </li>
             </ul>
-            <div class="card-body">
+            <div class="card-body" sec:authorize="hasRole('ADMIN')">
                 <form class="card-link" th:method="DELETE" th:action="@{/cinemas/{id}(id = *{id})}">
                     <input class="btn btn-link" type="submit" value="Delete"/>
                 </form>
-                <div class="card-link">
-                    <a class="card-link" th:href="@{/cinemas/{id}(id = *{id})}"> <span>Program 1 </span></a>
-                    <a class="card-link" th:href="@{/cinemas/{id}(id = *{id})}"> <span>Program 2 </span></a>
-                </div>
-<!--                <a class="card-link" th:href="@{/offers/{id}(id = *{id})}">Delete</a>-->
             </div>
         </div>
     </div>

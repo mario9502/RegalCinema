@@ -7,7 +7,7 @@ import bg.softuni.regalcinema.model.dtos.importDtos.AddCinemaDto;
 import java.util.List;
 
 public interface CinemaService {
-    boolean add(AddCinemaDto addCinemaDto);
+    void add(AddCinemaDto addCinemaDto);
 
     void init();
 

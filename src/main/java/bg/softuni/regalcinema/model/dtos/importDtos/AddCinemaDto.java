@@ -5,26 +5,26 @@ import jakarta.validation.constraints.Size;
 
 public class AddCinemaDto {
 
-    @NotBlank
-    @Size(min = 3, max = 30)
+    @NotBlank(message = "Name is required")
+    @Size(min = 3, max = 30, message = "Size must be between 3 and 30 symbols")
     private String name;
 
-    @NotBlank
-    @Size(min = 3, max = 150)
+    @NotBlank(message = "Location is required")
+    @Size(min = 3, max = 150, message = "Size must be between 3 and 150 symbols")
     private String location;
 
-    @Size(min = 15, max = 300)
+    @Size(min = 15, max = 300, message = "Size must be between 15 and 300 symbols")
     private String description;
 
-    @NotBlank
-    @Size(min = 10, max = 13)
+    @NotBlank(message = "Phone number is required")
+    @Size(min = 10, max = 13, message = "Size must be between 10 and 13 symbols")
     private String phoneNumber;
 
-    @NotBlank
-    @Size(min = 9, max = 11)
+    @NotBlank(message = "Working time is required")
+    @Size(min = 9, max = 11, message = "Size must be between 9 and 11 symbols")
     private String workingTime;
 
-    @Size(min = 15, max = 200)
+    @Size(min = 15, max = 200, message = "Size must be between 15 and 200 symbols")
     private String imageUrl;
 
     public AddCinemaDto() {}

@@ -5,9 +5,12 @@ import bg.softuni.regalcinema.model.dtos.importDtos.AddMovieDto;
 import bg.softuni.regalcinema.model.enums.Audio;
 import bg.softuni.regalcinema.model.enums.Genre;
 import bg.softuni.regalcinema.service.impl.MovieServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/movies")
@@ -34,11 +37,18 @@ public class MovieController {
     }
 
     @PostMapping("/add")
-    public String doAdd(AddMovieDto movieDto) {
+    public String doAdd(@Valid AddMovieDto movieDto, BindingResult bindingResult, RedirectAttributes rAtt) {
+
+        if (bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("addMovieData", movieDto);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.addMovieData", bindingResult);
+
+            return "redirect:/movies/add";
+        }
 
         this.movieService.add(movieDto);
 
-        return "redirect:/movies/add";
+        return "redirect:/movies";
 //        if (!this.movieService.add(movieDto)) {
 //            return "oops";
 //        }
@@ -47,7 +57,7 @@ public class MovieController {
     }
 
     @GetMapping("/{id}")
-    public String getMovieInfo(@PathVariable Long id, Model model) {
+    public String getMovieInfoById(@PathVariable Long id, Model model) {
 
         model.addAttribute("movieInfo", this.movieService.getMovieInfoById(id));
         //TODO fix the youtube section

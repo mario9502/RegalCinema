@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
-    <title>Regal Cinemas</title>
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico"/>
+    <title>Bad Request</title>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/main.css"/>
@@ -20,12 +18,12 @@
 
 <div class="container-fluid">
     <h3 class="text-center text-white mt-5">
-        Welcome to a whole new world. <br>
-        Welcome to Regal Cinemas!
-        <span sec:authorize="isAuthenticated()"> <span sec:authentication="name" ></span> </span>
+        It looks like the <th:block th:text="${type}"></th:block> you are trying to create already exists!
+    </h3>
+    <h3 class="text-center text-white mt-5">
+        Try again.
     </h3>
 </div>
-
 <div>
     <footer> </footer>
 </div>

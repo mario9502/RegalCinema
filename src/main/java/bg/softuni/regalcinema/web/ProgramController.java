@@ -4,12 +4,18 @@ import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramInfoDto;
 import bg.softuni.regalcinema.model.dtos.exportDtos.ShortCinemaInfoDto;
 import bg.softuni.regalcinema.model.dtos.importDtos.AddProgramDto;
 import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramMovieInfoDto;
+import bg.softuni.regalcinema.service.exception.IllegalArgException;
 import bg.softuni.regalcinema.service.impl.CinemaServiceImpl;
 import bg.softuni.regalcinema.service.impl.ProgramServiceImpl;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -40,13 +46,20 @@ public class ProgramController {
 
     @PostMapping("/add")
     @Transactional
-    public String doAdd(AddProgramDto programDto){
+    public String doAdd(@Valid AddProgramDto programDto, BindingResult bindingResult, RedirectAttributes rAtt){
 
-        if (!this.programService.add(programDto)) {
-            return "oops";
+        if (bindingResult.hasErrors()) {
+            rAtt.addFlashAttribute("programData", programDto);
+            rAtt.addFlashAttribute("org.springframework.validation.BindingResult.programData", bindingResult);
+
+            return "redirect:/programs/add";
         }
 
-        return "redirect:/programs/add";
+        if (!this.programService.add(programDto)) {
+            throw new IllegalArgException("Program");
+        }
+
+        return "redirect:/programs";
     }
 
     @GetMapping("/{cinemaId}/{date}")

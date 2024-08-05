@@ -11,6 +11,7 @@ import bg.softuni.regalcinema.repo.CinemaRepository;
 import bg.softuni.regalcinema.repo.MovieRepository;
 import bg.softuni.regalcinema.repo.ProgramRepository;
 import bg.softuni.regalcinema.service.ProgramService;
+import bg.softuni.regalcinema.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -56,30 +57,31 @@ public class ProgramServiceImpl implements ProgramService {
             }
         }
 
-        this.programRepository.save(mappedProgram);
-
         // Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00
         // Harry Potter / 10.99 / 15:40, 17:00, 18:50, 21:00
-        // Jurrasic Park / 16.99 / 14:45, 15:15, 18:30, 20:20
+        // Jurassic Park / 16.99 / 14:45, 15:15, 18:30, 20:20
         // 8 Mile / 12.99 / 14:00, 15:15, 17:30, 19:20
+
+        this.programRepository.save(mappedProgram);
         return true;
     }
 
     @Override
     public List<ProgramMovieInfoDto> getShortInfo(Long cinemaId, String date) {
 
-        Cinema cinema = this.cinemaRepository.findById(cinemaId).orElse(null);
+        Cinema cinema = this.cinemaRepository
+                .findById(cinemaId)
+                .orElseThrow(() -> new ObjectNotFoundException("Program"));
 
-        Program program1 = cinema.getPrograms()
+        Program program = cinema.getPrograms()
                 .stream()
-                .filter(program -> program.getDate().toString().equals(date))
+                .filter(p -> p.getDate().toString().equals(date))
                 .findAny()
-                .orElse(null);
-        //TODO throw an exception instead of null
+                .orElseThrow(() -> new ObjectNotFoundException("Program"));
 
         List<ProgramMovieInfoDto> resultList = new ArrayList<>();
 
-        List<String> movieInfoList = Arrays.stream(program1.getMoviesInfo().split("\\r\\n")).toList();
+        List<String> movieInfoList = Arrays.stream(program.getMoviesInfo().split("\\r\\n")).toList();
         for (String movieInfo : movieInfoList) {
             String[] info = movieInfo.split(" / ");
             String title = info[0];
@@ -109,7 +111,7 @@ public class ProgramServiceImpl implements ProgramService {
     @Override
     public List<ProgramInfoDto> findProgramsByCinemaId(Long cinemaId) {
 
-        Cinema cinema = this.cinemaRepository.findById(cinemaId).orElse(null); //TODO throw and exception instead of null
+        Cinema cinema = this.cinemaRepository.findById(cinemaId).orElseThrow(() -> new ObjectNotFoundException("Program"));
 
         return cinema.getPrograms().stream().map(program -> modelMapper.map(program, ProgramInfoDto.class)).toList();
     }
@@ -117,7 +119,7 @@ public class ProgramServiceImpl implements ProgramService {
 //    public void addMovies(AddProgramDto programDto, Program mappedProgram) {
 //        mappedProgram.setMovies(new ArrayList<>());
 //        programDto.getMovies().forEach(movie -> {
-//            Movie optMovie = movieRepository.findByTitle(movie).orElse(null); //TODO throw and exception instead of null
+//            Movie optMovie = movieRepository.findByTitle(movie)..orElseThrow(() -> new ObjectNotFoundException("Movie"));
 //            mappedProgram.addMovie(optMovie);
 //        });
 //    }
@@ -126,7 +128,7 @@ public class ProgramServiceImpl implements ProgramService {
 
         mappedProgram.setCinemas(new ArrayList<>());
         programDto.getCinemas().forEach(cinema -> {
-            Cinema optCinema = cinemaRepository.findByName(cinema).orElse(null);//TODO throw and exception instead of null
+            Cinema optCinema = cinemaRepository.findByName(cinema).orElseThrow(() -> new ObjectNotFoundException("Cinema"));
             mappedProgram.addCinema(optCinema);
         });
     }
