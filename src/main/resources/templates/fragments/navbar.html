@@ -18,8 +18,8 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto col-12 justify-content-between">
-                <li class="nav-item">
-<!--                    sec:authorize="isAuthenticated()"-->
+                <li class="nav-item"
+                    sec:authorize="isAuthenticated()">
                     <a class="nav-link"
                        th:href="@{/programs}"
                        th:classappend="${activeLink == 'programs'}? 'active'">
@@ -27,7 +27,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-<!--                    sec:authorize="isAuthenticated()"-->
                     <a class="nav-link"
                        th:href="@{/movies}"
                        th:classappend="${activeLink == 'all movies'}? 'active'">
@@ -35,7 +34,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <!--                    sec:authorize="isAuthenticated()"-->
                     <a class="nav-link"
                        th:href="@{/cinemas}"
                        th:classappend="${activeLink == 'cinemas'}? 'active'">
@@ -43,15 +41,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-<!--                    sec:authorize="isAuthenticated()"-->
                     <a class="nav-link">
 <!--                       th:href="@{/offers/all}"-->
 <!--                       th:classappend="${activeLink == 'all offers'}? 'active'">-->
                         Marathons
                     </a>
                 </li>
-                <li class="nav-item dropdown">
-<!--                    sec:authorize="hasRole('ADMIN')"-->
+                <li class="nav-item dropdown"
+                    sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                        th:classappend="${activeLink == 'admin'}? 'active'">
@@ -66,8 +63,8 @@
 <!--                        <a class="dropdown-item" href="/">Something else here</a>-->
                     </div>
                 </li>
-                <li class="nav-item">
-<!--                    sec:authorize="isAuthenticated()"-->
+                <li class="nav-item"
+                    sec:authorize="isAuthenticated()">
                     <div class="form-inline my-0 my-lg-0">
 <!--                        <div class="logged-user"-->
 <!--                             text="Welcome, Gosho"></div>-->
@@ -77,16 +74,16 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
-<!--                    sec:authorize="isAnonymous()"-->
+                <li class="nav-item"
+                    sec:authorize="isAnonymous()">
                     <a class="nav-link"
                        th:href="@{/users/register}"
                        th:classappend="${activeLink == 'register'}? 'active'">
                         Register
                     </a>
                 </li>
-                <li class="nav-item">
-<!--                    sec:authorize="isAnonymous()"-->
+                <li class="nav-item"
+                    sec:authorize="isAnonymous()">
                     <a class="nav-link"
                        th:href="@{/users/login}"
                        th:classappend="${activeLink == 'login'}? 'active'">

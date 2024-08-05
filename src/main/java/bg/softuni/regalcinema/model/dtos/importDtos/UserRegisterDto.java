@@ -6,26 +6,27 @@ import jakarta.validation.constraints.Size;
 
 public class UserRegisterDto {
 
-    @NotBlank
-    @Size(min = 3, max = 30)
+    @NotBlank(message = "")
+    @Size(min = 3, max = 30, message = "Size must be between 3 and 30 symbols")
     private String username;
 
-    @NotBlank
-    @Size(min = 3, max = 60)
+    @NotBlank(message = "")
+    @Size(min = 3, max = 50, message = "Size must be between 3 and 50 symbols")
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "Field must not be blank")
     private String confirmPassword;
 
-    @Email
+    @NotBlank(message = "Email must no be blank")
+    @Email(message = "Must be a valid email")
     private String email;
 
-    @NotBlank
-    @Size(min = 3, max = 40)
+    @NotBlank(message = "")
+    @Size(min = 3, max = 40, message = "Size must be between 3 and 40 symbols")
     private String firstName;
 
-    @NotBlank
-    @Size(min = 3, max = 40)
+    @NotBlank(message = "")
+    @Size(min = 3, max = 40, message = "Size must be between 3 and 40 symbols")
     private String lastName;
 
     public UserRegisterDto() {}

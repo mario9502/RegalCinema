@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -29,7 +29,7 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private UserRole role;
 
-    public User() {}
+    public UserEntity() {}
 
     public String getUsername() {
         return username;

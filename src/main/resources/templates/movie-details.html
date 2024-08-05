@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="https://www.thymeleaf.org">
+      xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
      <meta charset="UTF-8">
@@ -41,11 +42,10 @@
 <!--                <iframe id="frame" th:src="*{videoUrl}">-->
 <!--                </iframe>-->
 <!--            </section>-->
-            <div class="card-body">
+            <div class="card-body" sec:authorize="hasRole('ADMIN')">
                 <form class="card-link" th:method="DELETE" th:action="@{/movies/{id}(id = *{id})}">
                     <input class="btn btn-link" type="submit" value="Delete"/>
                 </form>
-<!--                <a class="card-link" th:href="@{/offers/{id}(id = *{id})}">Delete</a>-->
             </div>
         </div>
         <div class="movie card col-sm-2 col-md-3  col-lg-4 m-1 p-0">

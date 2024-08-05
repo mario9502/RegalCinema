@@ -1,11 +1,12 @@
 package bg.softuni.regalcinema.service.impl;
 
-import bg.softuni.regalcinema.model.User;
+import bg.softuni.regalcinema.model.UserEntity;
 import bg.softuni.regalcinema.model.dtos.importDtos.UserRegisterDto;
 import bg.softuni.regalcinema.model.enums.UserRole;
 import bg.softuni.regalcinema.repo.UserRepository;
 import bg.softuni.regalcinema.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,10 +14,12 @@ public class UserServiceImpl implements UserService {
 
     private final ModelMapper modelMapper;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(ModelMapper modelMapper, UserRepository userRepository) {
+    public UserServiceImpl(ModelMapper modelMapper, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -30,15 +33,16 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
-        User mappedUser = modelMapper.map(registerDto, User.class);
+        UserEntity mappedUserEntity = modelMapper.map(registerDto, UserEntity.class);
+        mappedUserEntity.setPassword(passwordEncoder.encode(mappedUserEntity.getPassword()));
 
         if (userRepository.count() < 1) {
-            mappedUser.setRole(UserRole.ADMIN);
+            mappedUserEntity.setRole(UserRole.ADMIN);
         } else {
-            mappedUser.setRole(UserRole.USER);
+            mappedUserEntity.setRole(UserRole.USER);
         }
 
-        userRepository.save(mappedUser);
+        userRepository.save(mappedUserEntity);
 
         return true;
     }
