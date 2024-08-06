@@ -15,9 +15,6 @@ public class Program extends BaseEntity {
     @OneToMany
     private List<ProgramMovieEntity> movies;
 
-//    @Column(name = "movies_info", nullable = false)
-//    private String moviesInfo;
-
     @Column(nullable = false)
     private LocalDate date;
 

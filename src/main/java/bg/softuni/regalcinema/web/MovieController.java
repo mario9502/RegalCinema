@@ -60,8 +60,8 @@ public class MovieController {
     @GetMapping("/{id}")
     public String getMovieInfoById(@PathVariable Long id, Model model) {
 
-        model.addAttribute("movieInfo", this.movieService.getMovieInfoById(id));
-        //TODO fix the youtube section
+        model.addAttribute("movieInfo", this.movieService.getMovieInfoById(id));//TODO fix the youtube section
+
 
         return "movie-details";
     }
@@ -69,8 +69,8 @@ public class MovieController {
     @GetMapping("/title={title}")
     public String getMovieInfoByTitle(@PathVariable String title, Model model) {
 
-        model.addAttribute("movieInfo", this.movieService.getMovieInfoByTitle(title));
-        //TODO fix the youtube section
+        model.addAttribute("movieInfo", this.movieService.getMovieInfoByTitle(title));//TODO fix the youtube section
+        //TODO rest exception handling
 
         return "movie-details";
     }

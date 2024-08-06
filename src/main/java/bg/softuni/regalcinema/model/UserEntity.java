@@ -26,7 +26,7 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private UserRole role;
 
-    //TODO
+    //TODO see what spring do when no such user exist when login
 
     public UserEntity() {}
 

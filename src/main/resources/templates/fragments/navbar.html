@@ -22,6 +22,7 @@
                     sec:authorize="isAuthenticated()">
                     <a class="nav-link"
                        th:href="@{/programs}"
+                       th:text="#{navbar_programs}"
                        th:classappend="${activeLink == 'programs'}? 'active'">
                         Program
                     </a>
@@ -29,6 +30,7 @@
                 <li class="nav-item">
                     <a class="nav-link"
                        th:href="@{/movies}"
+                       th:text="#{navbar_movies}"
                        th:classappend="${activeLink == 'all movies'}? 'active'">
                         Movies
                     </a>
@@ -36,6 +38,7 @@
                 <li class="nav-item">
                     <a class="nav-link"
                        th:href="@{/cinemas}"
+                       th:text="#{navbar_cinemas}"
                        th:classappend="${activeLink == 'cinemas'}? 'active'">
                         Cinemas
                     </a>
@@ -43,6 +46,7 @@
                 <li class="nav-item">
                     <a class="nav-link">
 <!--                       th:href="@{/offers/all}"-->
+<!--                        th:text="#{navbar_marathons}"-->
 <!--                       th:classappend="${activeLink == 'all offers'}? 'active'">-->
                         Marathons
                     </a>
@@ -51,25 +55,21 @@
                     sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                       th:classappend="${activeLink == 'admin'}? 'active'">
+                       th:text="#{navbar_admin}" th:classappend="${activeLink == 'admin'}? 'active'">
                         Admin
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" th:href="@{/movies/add}">Add Movie</a>
-                        <a class="dropdown-item" th:href="@{/cinemas/add}">Add Cinema</a>
-                        <a class="dropdown-item" th:href="@{/marathons/add}">Add Marathon</a>
-                        <a class="dropdown-item" th:href="@{/programs/add}">Add Program</a>
-<!--                        <div class="dropdown-divider"></div>-->
-<!--                        <a class="dropdown-item" href="/">Something else here</a>-->
+                        <a class="dropdown-item" th:href="@{/movies/add}" th:text="#{admin_movie}">Add Movie</a>
+                        <a class="dropdown-item" th:href="@{/cinemas/add}" th:text="#{admin_cinema}">Add Cinema</a>
+                        <a class="dropdown-item" th:href="@{/marathons/add}" th:text="#{admin_marathon}">Add Marathon</a>
+                        <a class="dropdown-item" th:href="@{/programs/add}" th:text="#{admin_program}">Add Program</a>
                     </div>
                 </li>
                 <li class="nav-item"
                     sec:authorize="isAuthenticated()">
                     <div class="form-inline my-0 my-lg-0">
-<!--                        <div class="logged-user"-->
-<!--                             text="Welcome, Gosho"></div>-->
                         <form th:method="POST" th:action="@{/users/logout}">
-                            <input class="btn bg-transparent" type="submit" value="Logout"/>
+                            <input class="btn bg-transparent" type="submit" th:value="#{navbar_logout}"/>
                         </form>
                     </div>
                 </li>
@@ -78,6 +78,7 @@
                     sec:authorize="isAnonymous()">
                     <a class="nav-link"
                        th:href="@{/users/register}"
+                       th:text="#{navbar_register}"
                        th:classappend="${activeLink == 'register'}? 'active'">
                         Register
                     </a>
@@ -86,9 +87,22 @@
                     sec:authorize="isAnonymous()">
                     <a class="nav-link"
                        th:href="@{/users/login}"
+                       th:text="#{navbar_login}"
                        th:classappend="${activeLink == 'login'}? 'active'">
                         Login
                     </a>
+                </li>
+
+                <li class="nav-item">
+                    <form class="nav-link dropdown" th:method="GET">
+                        <label class="text-white" for="lang" th:text="#{navbar_lang}">Language</label>
+<!--                        -->
+                        <select class="bg-dark text-light text-center" id="lang" name="lang" onchange="this.form.submit()">
+                            <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                            <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+                        </select>
+                    </form>
+
                 </li>
 
             </ul>

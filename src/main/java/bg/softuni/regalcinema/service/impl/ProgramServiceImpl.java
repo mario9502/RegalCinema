@@ -15,6 +15,8 @@ import bg.softuni.regalcinema.repo.ProgramRepository;
 import bg.softuni.regalcinema.service.ProgramService;
 import bg.softuni.regalcinema.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.net.URLEncoder;
@@ -26,6 +28,7 @@ import java.util.*;
 @Service
 public class ProgramServiceImpl implements ProgramService {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(ProgramServiceImpl.class);
     private final ProgramRepository programRepository;
     private final MovieServiceImpl movieService;
     private final CinemaRepository cinemaRepository;
@@ -83,11 +86,6 @@ public class ProgramServiceImpl implements ProgramService {
             }
         }
 
-        // Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00
-        // Harry Potter and the Sorcerers Stone / 10.99 / 15:40, 17:00, 18:50, 21:00
-        // Jurassic Park / 16.99 / 14:45, 15:15, 18:30, 20:20
-        // 8 Mile / 12.99 / 14:00, 15:15, 17:30, 19:20
-
         this.programRepository.save(mappedProgram);
         return true;
     }
@@ -144,13 +142,14 @@ public class ProgramServiceImpl implements ProgramService {
         return cinema.getPrograms().stream().map(program -> modelMapper.map(program, ProgramInfoDto.class)).toList();
     }
 
-//    public void addMovies(AddProgramDto programDto, Program mappedProgram) {
-//        mappedProgram.setMovies(new ArrayList<>());
-//        programDto.getMovies().forEach(movie -> {
-//            Movie optMovie = movieRepository.findByTitle(movie)..orElseThrow(() -> new ObjectNotFoundException("Movie"));
-//            mappedProgram.addMovie(optMovie);
-//        });
-//    }
+    @Override
+    public void cleanOutdatedProgram() {
+        LocalDate today = LocalDate.now();
+
+        LOGGER.info("Clean all programs with date before {}", today);
+        this.programRepository.deleteAllByDateBefore(today);
+
+    }
 
     public void addCinemas(AddProgramDto programDto, Program mappedProgram) {
 

@@ -89,7 +89,6 @@ public class ProgramController {
     public String viewProgram(@PathVariable Long cinemaId, Model model) {
 
         List<ProgramInfoDto> programsByCinemaId = this.programService.findProgramsByCinemaId(cinemaId);
-//        List<ProgramMovieInfoDto> programMovieInfoDtos = this.programService.getShortInfo(programsByCinemaId);
 
         model.addAttribute("allPrograms", programsByCinemaId);
         model.addAttribute("cinemaId", cinemaId);

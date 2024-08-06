@@ -20,8 +20,9 @@
 
 <div class="container-fluid">
     <h3 class="text-center text-white mt-5">
-        Welcome to a whole new world. <br>
-        Welcome to Regal Cinemas!
+        <th:block th:text="#{home_message1}"></th:block>
+        <br>
+        <th:block th:text="#{home_message2}"></th:block>
         <span sec:authorize="isAuthenticated()"> <span sec:authentication="name" ></span> </span>
     </h3>
 </div>

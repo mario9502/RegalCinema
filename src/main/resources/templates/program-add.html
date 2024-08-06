@@ -53,7 +53,7 @@
 
         <div class="form-group">
             <label th:for="moviesInfo" class="text-white font-weight-bold">Movies Info</label>
-            <textarea th:field="*{moviesInfo}" id="moviesInfo" name="moviesInfo" type="textarea" class="form-control" rows="4"
+            <textarea th:field="*{moviesInfo}" th:errorclass="is-invalid" id="moviesInfo" name="moviesInfo" type="textarea" class="form-control" rows="4"
                       placeholder="Title / Ticket price / Start hours
 Example:
 Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00">
@@ -62,7 +62,7 @@ Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00">
 
             <p th:each="error :${#fields.errors('moviesInfo')}"
                th:text="${error}"
-               class="alert-danger">
+               class="invalid-feedback errors alert alert-danger">
                 Movies info is required.
             </p>
         </div>
@@ -70,12 +70,12 @@ Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label th:for="date" class="text-white font-weight-bold">Date</label>
-                <input th:field="*{date}" id="date" name="date" type="date" class="form-control"
+                <input th:field="*{date}" th:errorclass="is-invalid" id="date" name="date" type="date" class="form-control"
                        placeholder="Date">
 
                 <p th:each="error :${#fields.errors('date')}"
                    th:text="${error}"
-                   class="alert-danger">
+                   class="invalid-feedback errors alert alert-danger">
                     Date is required.
                 </p>
             </div>
