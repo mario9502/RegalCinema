@@ -22,12 +22,11 @@ public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String lastName;
 
-    @Basic
-    private boolean isActive;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole role;
+
+    //TODO
 
     public UserEntity() {}
 
@@ -69,14 +68,6 @@ public class UserEntity extends BaseEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
     }
 
     public UserRole getRole() {

@@ -12,13 +12,19 @@ public class Program extends BaseEntity {
     @ManyToMany
     private List<Cinema> cinemas;
 
-    @Column(name = "movies_info", nullable = false)
-    private String moviesInfo;
+    @OneToMany
+    private List<ProgramMovieEntity> movies;
+
+//    @Column(name = "movies_info", nullable = false)
+//    private String moviesInfo;
 
     @Column(nullable = false)
     private LocalDate date;
 
-    public Program() {this.cinemas = new ArrayList<>();}
+    public Program() {
+        this.cinemas = new ArrayList<>();
+        this.movies = new ArrayList<>();
+    }
 
     public List<Cinema> getCinemas() {
         return cinemas;
@@ -26,14 +32,6 @@ public class Program extends BaseEntity {
 
     public void setCinemas(List<Cinema> cinemas) {
         this.cinemas = cinemas;
-    }
-
-    public String getMoviesInfo() {
-        return moviesInfo;
-    }
-
-    public void setMoviesInfo(String moviesInfo) {
-        this.moviesInfo = moviesInfo;
     }
 
     public void addCinema(Cinema cinema){
@@ -46,5 +44,21 @@ public class Program extends BaseEntity {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    }
+
+    public List<ProgramMovieEntity> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<ProgramMovieEntity> movies) {
+        this.movies = movies;
+    }
+
+    public void addMovie(ProgramMovieEntity movie){
+        this.movies.add(movie);
+    }
+
+    public void removeMovie(ProgramMovieEntity movie){
+        this.movies.remove(movie);
     }
 }

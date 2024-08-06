@@ -7,6 +7,7 @@ import bg.softuni.regalcinema.model.enums.Genre;
 import bg.softuni.regalcinema.service.impl.MovieServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -89,6 +90,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public String delete(@PathVariable Long id){
 
         this.movieService.deleteById(id);

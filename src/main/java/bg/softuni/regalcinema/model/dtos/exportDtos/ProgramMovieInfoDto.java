@@ -1,8 +1,6 @@
 package bg.softuni.regalcinema.model.dtos.exportDtos;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ProgramMovieInfoDto {
 
@@ -12,20 +10,18 @@ public class ProgramMovieInfoDto {
 
     private LocalDate premiere;
 
-    private List<String> startHour;
+    private String startHours;
 
     private double ticketPrice;
 
-    public ProgramMovieInfoDto() {
-        this.startHour = new ArrayList<>();
-    }
+    public ProgramMovieInfoDto() {}
 
-    public ProgramMovieInfoDto(String title, String imageUrl, LocalDate premiere, List<String> startHour, double ticketPrice) {
+    public ProgramMovieInfoDto(String title, String imageUrl, LocalDate premiere, String startHours, double ticketPrice) {
         this();
         this.title = title;
         this.imageUrl = imageUrl;
         this.premiere = premiere;
-        this.startHour = startHour;
+        this.startHours = startHours;
         this.ticketPrice = ticketPrice;
     }
 
@@ -45,14 +41,6 @@ public class ProgramMovieInfoDto {
         this.premiere = premiere;
     }
 
-    public List<String> getStartHour() {
-        return startHour;
-    }
-
-    public void setStartHour(List<String> startHour) {
-        this.startHour = startHour;
-    }
-
     public double getTicketPrice() {
         return ticketPrice;
     }
@@ -67,5 +55,13 @@ public class ProgramMovieInfoDto {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getStartHours() {
+        return startHours;
+    }
+
+    public void setStartHours(String startHours) {
+        this.startHours = startHours;
     }
 }

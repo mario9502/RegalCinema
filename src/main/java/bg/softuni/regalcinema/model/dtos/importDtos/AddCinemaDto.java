@@ -13,7 +13,7 @@ public class AddCinemaDto {
     @Size(min = 3, max = 150, message = "Size must be between 3 and 150 symbols")
     private String location;
 
-    @Size(min = 15, max = 300, message = "Size must be between 15 and 300 symbols")
+    @Size(min = 15, max = 2000, message = "Size must be between 15 and 500 symbols")
     private String description;
 
     @NotBlank(message = "Phone number is required")

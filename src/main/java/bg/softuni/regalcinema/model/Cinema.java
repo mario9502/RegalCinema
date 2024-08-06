@@ -15,7 +15,7 @@ public class Cinema extends BaseEntity {
     @Column(nullable = false)
     private String location;
 
-    @Basic
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false, name = "phone_number")
