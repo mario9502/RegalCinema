@@ -20,7 +20,7 @@ public class SecurityConfig {
                                 authorizeRequest
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                         .requestMatchers("/", "/users/register", "/users/login",
-                                                "/movies", "/movies/{id}", "/cinemas").permitAll()
+                                                "/movies", "/movies/{id}", "/cinemas", "/cinemas/{id}").permitAll()
                                         .anyRequest().authenticated()
                 )
                 .formLogin(

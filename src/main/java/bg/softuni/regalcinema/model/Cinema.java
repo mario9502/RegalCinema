@@ -15,7 +15,7 @@ public class Cinema extends BaseEntity {
     @Column(nullable = false)
     private String location;
 
-    @Column(columnDefinition = "TEXT")
+    @Basic
     private String description;
 
     @Column(nullable = false, name = "phone_number")
@@ -99,4 +99,6 @@ public class Cinema extends BaseEntity {
     public void setPrograms(List<Program> program) {
         this.programs = program;
     }
+
+    //todo some client-side validations
 }
