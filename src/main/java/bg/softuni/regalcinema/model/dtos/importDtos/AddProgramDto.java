@@ -25,6 +25,12 @@ public class AddProgramDto {
         this.cinemas = new ArrayList<>();
     }
 
+    public AddProgramDto(List<String> cinemas, String moviesInfo, LocalDate date) {
+        this.cinemas = cinemas;
+        this.moviesInfo = moviesInfo;
+        this.date = date;
+    }
+
     public List<String> getCinemas() {
         return cinemas;
     }

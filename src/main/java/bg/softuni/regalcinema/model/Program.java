@@ -23,6 +23,8 @@ public class Program extends BaseEntity {
         this.movies = new ArrayList<>();
     }
 
+
+
     public List<Cinema> getCinemas() {
         return cinemas;
     }

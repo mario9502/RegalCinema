@@ -33,15 +33,6 @@ public class MovieServiceImpl implements MovieService {
                 .uri("/movies/add")
                 .body(movieDto)
                 .retrieve();
-//        if (movieRepository.existsByTitle(movieDto.getTitle())) {
-//            return false;
-//        }
-//
-//        Movie mappedMovie = modelMapper.map(movieDto, Movie.class);
-//
-//        movieRepository.save(mappedMovie);
-//
-//        return true;
     }
 
     @Override

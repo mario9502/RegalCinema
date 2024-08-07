@@ -25,6 +25,23 @@ import java.util.*;
 @Service
 public class ProgramServiceImpl implements ProgramService {
 
+//    private static final List<AddProgramDto> PROGRAM_LIST = List.of(
+//            new AddProgramDto(List.of("Regal Cinema", "CineGrand"),
+//                    """
+//                            Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00
+//                            Godzilla / 10.99 / 15:40, 17:00, 18:50, 21:00
+//                            Jurassic Park / 16.99 / 14:45, 15:15, 18:30, 20:20
+//                            Jumanji / 12.99 / 14:00, 15:15, 17:30, 19:20""", LocalDate.of(2024,8,9)),
+//            new AddProgramDto(List.of("Regal Cinema", "CineGrand"),
+//                    """
+//                            Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00
+//                            Jurassic Park / 16.99 / 14:45, 15:15, 18:30, 20:20
+//                            Jumanji / 12.99 / 14:00, 15:15, 17:30, 19:20""", LocalDate.of(2024,8,10)),
+//            new AddProgramDto(List.of("Regal Cinema", "CineGrand"),
+//                    "Home Alone / 7.99 / 13:40, 15:00, 16:50, 18:00\n" +
+//                            "Jumanji / 12.99 / 14:00, 15:15, 17:30, 19:20", LocalDate.of(2024,8,11))
+//    );
+
     private final Logger LOGGER = LoggerFactory.getLogger(ProgramServiceImpl.class);
     private final ProgramRepository programRepository;
     private final MovieServiceImpl movieService;
@@ -39,6 +56,15 @@ public class ProgramServiceImpl implements ProgramService {
         this.programMovieEntityRepository = programMovieEntityRepository;
         this.modelMapper = modelMapper;
     }
+
+//    @Override
+//    public void init() {
+//        if (programRepository.count() < 1) {
+//            for (AddProgramDto addProgramDto : PROGRAM_LIST) {
+//                this.add(addProgramDto);
+//            }
+//        }
+//    }
 
     @Override
     public boolean add(AddProgramDto programDto) {
@@ -86,6 +112,8 @@ public class ProgramServiceImpl implements ProgramService {
         this.programRepository.save(mappedProgram);
         return true;
     }
+
+
 
     @Override
     public List<ProgramMovieInfoDto> getShortInfo(Long cinemaId, String date) {

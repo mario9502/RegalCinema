@@ -43,14 +43,6 @@
                         Cinemas
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link">
-<!--                       th:href="@{/offers/all}"-->
-<!--                        th:text="#{navbar_marathons}"-->
-<!--                       th:classappend="${activeLink == 'all offers'}? 'active'">-->
-                        Marathons
-                    </a>
-                </li>
                 <li class="nav-item dropdown"
                     sec:authorize="hasRole('ADMIN')">
                     <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button"
@@ -61,9 +53,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" th:href="@{/movies/add}" th:text="#{admin_movie}">Add Movie</a>
                         <a class="dropdown-item" th:href="@{/cinemas/add}" th:text="#{admin_cinema}">Add Cinema</a>
-                        <a class="dropdown-item" th:href="@{/marathons/add}" th:text="#{admin_marathon}">Add Marathon</a>
                         <a class="dropdown-item" th:href="@{/programs/add}" th:text="#{admin_program}">Add Program</a>
-                        <a class="dropdown-item" th:href="@{/marathons/add}" th:text="#{admin_marathon}">Add Marathon</a>
                     </div>
                 </li>
                 <li class="nav-item"
