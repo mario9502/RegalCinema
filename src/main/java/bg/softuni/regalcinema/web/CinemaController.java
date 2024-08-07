@@ -21,6 +21,7 @@ public class CinemaController {
 
     private final CinemaServiceImpl cinemaService;
 
+
     public CinemaController(CinemaServiceImpl cinemaService) {
         this.cinemaService = cinemaService;
     }

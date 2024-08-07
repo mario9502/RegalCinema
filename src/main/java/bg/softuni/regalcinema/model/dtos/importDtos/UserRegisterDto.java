@@ -31,6 +31,15 @@ public class UserRegisterDto {
 
     public UserRegisterDto() {}
 
+    public UserRegisterDto(String username, String password, String confirmPassword, String email, String firstName, String lastName) {
+        this.confirmPassword = confirmPassword;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.username = username;
+    }
+
     public String getUsername() {
         return username;
     }

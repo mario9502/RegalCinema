@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-        xmlns:th="https://www.thymeleaf.org">
+        xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -16,7 +17,7 @@
 
 <div th:replace="~{/fragments/navbar::navbar(activeLink=${'add cinema'})}"></div>
 
-<div class="container-fluid">
+<div class="container-fluid" sec:authorize="hasRole('ADMIN')">
     <h2 class="text-center text-white">Add Cinema</h2>
     <form   th:method="POST"
             th:action="@{/cinemas/add}"

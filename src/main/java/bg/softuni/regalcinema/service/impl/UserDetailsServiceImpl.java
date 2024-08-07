@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserEntity userEntity = this.userRepository.findByUsername(username)
+        UserEntity userEntity = this.userRepository.findByUsername(username) //TODO see why it isn't throwing the exception
                 .orElseThrow(() -> new UsernameNotFoundException("User with username: " + username + " does not exist!"));
 
         return User

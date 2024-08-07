@@ -29,6 +29,15 @@ public class AddCinemaDto {
 
     public AddCinemaDto() {}
 
+    public AddCinemaDto(String name, String location, String description, String phoneNumber, String workingTime, String imageUrl) {
+        this.location = location;
+        this.name = name;
+        this.description = description;
+        this.phoneNumber = phoneNumber;
+        this.workingTime = workingTime;
+        this.imageUrl = imageUrl;
+    }
+
     public String getName() {
         return name;
     }
