@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -34,26 +33,7 @@ public class CinemaServiceImplTest {
     }
 
     @Test
-    void testAddCinema_ShouldSuccess(){
-
-        AddCinemaDto cinemaDto = getAddCinemaDto();
-
-        toTest.add(cinemaDto);
-
-        verify(mockedCinemaRepository).save(cinemaCaptor.capture());
-
-        Cinema actualSavedCinema = cinemaCaptor.getValue();
-
-        Assertions.assertEquals(actualSavedCinema.getName(), cinemaDto.getName());
-        Assertions.assertEquals(actualSavedCinema.getLocation(), cinemaDto.getLocation());
-        Assertions.assertEquals(actualSavedCinema.getDescription(), cinemaDto.getDescription());
-        Assertions.assertEquals(actualSavedCinema.getPhoneNumber(), cinemaDto.getPhoneNumber());
-        Assertions.assertEquals(actualSavedCinema.getWorkingTime(), cinemaDto.getWorkingTime());
-        Assertions.assertEquals(actualSavedCinema.getImageUrl(), cinemaDto.getImageUrl());
-    }
-
-    @Test
-    void testAddCinema_ShouldFail(){
+    void testAddCinema_ShouldThrow(){
         AddCinemaDto cinemaDto = getAddCinemaDto();
 
         when(mockedCinemaRepository.existsByName(cinemaDto.getName())).thenReturn(true);

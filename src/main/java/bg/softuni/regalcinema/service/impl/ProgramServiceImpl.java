@@ -1,7 +1,6 @@
 package bg.softuni.regalcinema.service.impl;
 
 import bg.softuni.regalcinema.model.Cinema;
-import bg.softuni.regalcinema.model.Movie;
 import bg.softuni.regalcinema.model.Program;
 import bg.softuni.regalcinema.model.ProgramMovieEntity;
 import bg.softuni.regalcinema.model.dtos.exportDtos.MovieInfoDto;
@@ -9,7 +8,6 @@ import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramInfoDto;
 import bg.softuni.regalcinema.model.dtos.importDtos.AddProgramDto;
 import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramMovieInfoDto;
 import bg.softuni.regalcinema.repo.CinemaRepository;
-import bg.softuni.regalcinema.repo.MovieRepository;
 import bg.softuni.regalcinema.repo.ProgramMovieEntityRepository;
 import bg.softuni.regalcinema.repo.ProgramRepository;
 import bg.softuni.regalcinema.service.ProgramService;
@@ -22,7 +20,6 @@ import org.springframework.stereotype.Service;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service

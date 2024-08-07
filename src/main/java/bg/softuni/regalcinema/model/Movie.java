@@ -28,9 +28,6 @@ public class Movie extends BaseEntity {
     @Basic
     private LocalDate premiere;
 
-    @Column(name = "video_url")
-    private String videoUrl;
-
     @Column(name = "image_url")
     private String imageUrl;
 
@@ -106,14 +103,6 @@ public class Movie extends BaseEntity {
 
     public void setGenre(Genre genre) {
         this.genre = genre;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
     }
 
     public String getImageUrl() {

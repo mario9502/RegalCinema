@@ -5,15 +5,10 @@ import bg.softuni.regalcinema.model.ProgramMovieEntity;
 import bg.softuni.regalcinema.model.dtos.exportDtos.MovieInfoDto;
 import bg.softuni.regalcinema.model.dtos.exportDtos.ShortMovieInfoDto;
 import bg.softuni.regalcinema.model.dtos.importDtos.AddMovieDto;
-import bg.softuni.regalcinema.model.dtos.exportDtos.ProgramMovieInfoDto;
-import bg.softuni.regalcinema.repo.MovieRepository;
 import bg.softuni.regalcinema.repo.ProgramRepository;
 import bg.softuni.regalcinema.service.MovieService;
-import org.modelmapper.ModelMapper;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 

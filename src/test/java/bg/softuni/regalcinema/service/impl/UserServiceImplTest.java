@@ -39,14 +39,7 @@ public class UserServiceImplTest {
     @Test
     void testUserRegister(){
 
-        UserRegisterDto userRegisterDto = new UserRegisterDto(
-                "test_user",
-                "testpassword",
-                "testpassword",
-                "test@email",
-                "Test",
-                "User"
-        );
+        UserRegisterDto userRegisterDto = createRegisterDto();
 
         when(mockedPasswordEncoder.encode(userRegisterDto.getPassword()))
                 .thenReturn(userRegisterDto.getPassword() + "ENCODED");
@@ -64,5 +57,16 @@ public class UserServiceImplTest {
         Assertions.assertEquals(userRegisterDto.getFirstName(), actualSavedUser.getFirstName());
         Assertions.assertEquals("USER", actualSavedUser.getRole().name());
         Assertions.assertEquals(userRegisterDto.getLastName(), actualSavedUser.getLastName());
+    }
+
+    private static UserRegisterDto createRegisterDto() {
+        return new UserRegisterDto(
+                "test_user",
+                "testpassword",
+                "testpassword",
+                "test@email",
+                "Test",
+                "User"
+        );
     }
 }

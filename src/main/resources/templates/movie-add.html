@@ -139,17 +139,6 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label th:for="videoUrl" class="text-white font-weight-bold">Trailer URL</label>
-                <input th:field="*{videoUrl}" th:errorclass="is-invalid" id="videoUrl" name="videoUrl" type="url" class="form-control"
-                       placeholder="Put movie trailer URL here">
-
-                <p th:each="error :${#fields.errors('videoUrl')}"
-                   th:text="${error}"
-                   class="invalid-feedback errors alert alert-danger">
-                    Trailer URL is required.
-                </p>
-            </div>
-            <div class="form-group col-md-6 mb-3">
                 <label th:for="premiere" class="text-white font-weight-bold">Premiere</label>
                 <input th:field="*{premiere}" th:errorclass="is-invalid" id="premiere" name="premiere" type="date" class="form-control"
                        placeholder="Premiere date">

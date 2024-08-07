@@ -38,10 +38,6 @@
                     <div class="text"><span> Description: <span th:text="*{description}"></span> </span></div>
                 </li>
             </ul>
-<!--            <section id="video">-->
-<!--                <iframe id="frame" th:src="*{videoUrl}">-->
-<!--                </iframe>-->
-<!--            </section>-->
             <div class="card-body" sec:authorize="hasRole('ADMIN')">
                 <form class="card-link" th:method="DELETE" th:action="@{/movies/{id}(id = *{id})}">
                     <input class="btn btn-link" type="submit" value="Delete"/>

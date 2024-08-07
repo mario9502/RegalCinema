@@ -36,9 +36,6 @@ public class AddMovieDto {
     private LocalDate premiere;
 
     @Size(min = 10, max = 200, message = "Size must be between 10 and 200 symbols")
-    private String videoUrl;
-
-    @Size(min = 10, max = 200, message = "Size must be between 10 and 200 symbols")
     private String imageUrl;
 
     @NotNull(message = "Audio is required")
@@ -95,14 +92,6 @@ public class AddMovieDto {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
     }
 
     public Audio getAudio() {

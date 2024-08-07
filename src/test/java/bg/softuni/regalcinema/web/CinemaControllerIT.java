@@ -2,6 +2,7 @@ package bg.softuni.regalcinema.web;
 
 import bg.softuni.regalcinema.model.Cinema;
 import bg.softuni.regalcinema.repo.CinemaRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -25,8 +26,13 @@ public class CinemaControllerIT {
     @Autowired
     private MockMvc mockMvc;
 
+    @BeforeEach
+    void setUp(){
+        this.cinemaRepository.deleteAll();
+    }
+
     @Test
-    void addCinema() throws Exception {
+    void addCinema_ShouldSuccess() throws Exception {
 
         Cinema testCinema = createTestCinema();
 
@@ -40,10 +46,33 @@ public class CinemaControllerIT {
                 .param("phoneNumber", testCinema.getPhoneNumber())
                 .param("imageUrl", testCinema.getImageUrl())
                 .param("workingTime", testCinema.getWorkingTime())
-                ).andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/cinemas"));
+        ).andExpect(status().is3xxRedirection())
+        .andExpect(redirectedUrl("/cinemas"));
 
-        assertEquals(cinemaRepository.count(), before + 1);
+        assertEquals(before + 1, cinemaRepository.count());
+
+    }
+
+    @Test
+    void addCinema_ShouldFailForIncorrectData() throws Exception {
+
+        Cinema testCinema = createTestCinema();
+
+        long before = cinemaRepository.count();
+
+        mockMvc.perform(post("/cinemas/add")
+                        .with(csrf())
+                        .param("name", testCinema.getName())
+                        .param("location", testCinema.getLocation())
+                        .param("description", testCinema.getDescription())
+                        .param("phoneNumber", testCinema.getPhoneNumber() + "11111111")
+                        .param("imageUrl", testCinema.getImageUrl())
+                        .param("workingTime", testCinema.getWorkingTime())
+                ).andExpect(status().is3xxRedirection())
+                .andExpect(flash().attributeExists("cinemaData", "org.springframework.validation.BindingResult.cinemaData"))
+                .andExpect(redirectedUrl("/cinemas/add"));
+
+        assertEquals(cinemaRepository.count(), before);
 
     }
 

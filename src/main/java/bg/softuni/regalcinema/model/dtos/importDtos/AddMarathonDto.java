@@ -7,6 +7,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AddMarathonDto {
 
@@ -26,9 +27,8 @@ public class AddMarathonDto {
     @JsonFormat(pattern = DATE_TIME_FORMAT)
     private LocalDateTime end;
 
-    @NotBlank
-    @Size(max = 300)
-    private String movies;
+    @NotNull
+    private List<String> movies;
 
     @Size(min = 15, max = 300)
     private String description;
@@ -64,11 +64,11 @@ public class AddMarathonDto {
         this.location = location;
     }
 
-    public String getMovies() {
+    public List<String> getMovies() {
         return movies;
     }
 
-    public void setMovies(String movies) {
+    public void setMovies(List<String> movies) {
         this.movies = movies;
     }
 

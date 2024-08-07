@@ -36,9 +36,6 @@ public class MovieInfoDto {
     private LocalDate premiere;
 
     @Size(min = 10, max = 200)
-    private String videoUrl;
-
-    @Size(min = 10, max = 200)
     private String imageUrl;
 
     private Audio audio;
@@ -101,14 +98,6 @@ public class MovieInfoDto {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
     }
 
     public Audio getAudio() {

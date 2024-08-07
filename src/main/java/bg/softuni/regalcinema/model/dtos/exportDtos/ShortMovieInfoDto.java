@@ -8,8 +8,6 @@ public class ShortMovieInfoDto {
 
     private String imageUrl;
 
-    private String videoUrl;
-
     public ShortMovieInfoDto() {}
 
     public long getId() {
@@ -34,13 +32,5 @@ public class ShortMovieInfoDto {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getVideoUrl() {
-        return videoUrl;
-    }
-
-    public void setVideoUrl(String videoUrl) {
-        this.videoUrl = videoUrl;
     }
 }
